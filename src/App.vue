@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import Test from './components/test.vue';
+import Layout from "@/layout/index.vue";
+import { GlobalThemeOverrides } from "naive-ui";
+
+const themeOverrides:GlobalThemeOverrides = {}
+
 </script>
 
 <template>
-  <div class="text-red-500">asd</div>
-  <Test />
-
+  <n-config-provider :theme-overrides="themeOverrides">
+    <Layout />
+  </n-config-provider>
 </template>
 
 <style scoped></style>

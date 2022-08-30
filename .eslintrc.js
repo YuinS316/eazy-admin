@@ -20,13 +20,13 @@ module.exports = defineConfig({
     "plugin:vue/vue3-recommended",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended", // typescript-eslint推荐规则,
-    "prettier",
     "plugin:prettier/recommended",
+    "prettier"
   ],
   rules: {
     // 禁止使用 var
     "no-var": "error",
-    semi: "off",
+    // semi: "off",
     // 优先使用 interface 而不是 type
     "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
     "@typescript-eslint/no-explicit-any": "off", // 可以使用 any 类型
@@ -35,23 +35,20 @@ module.exports = defineConfig({
     "@typescript-eslint/no-var-requires": 0,
     // https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/ban-types.md
     "@typescript-eslint/ban-types": ["error", {}],
+    "prettier/prettier": "off", 
+    "vue/html-indent": "off",
+    // 关闭此规则 使用 prettier 的格式化规则，
+    "vue/max-attributes-per-line": ["off"],
+    // 优先使用驼峰，navie-ui 组件除外
+    "vue/component-name-in-template-casing": [
+      "error",
+      "PascalCase",
+      {
+        ignores: ["/^n-/", "/^router-/"],
+        registeredComponentsOnly: false,
+      },
+    ],
   },
-  "prettier/prettier": [
-    "error",
-    { singleQuote: false, parser: "flow", semi: true },
-  ],
-  "vue/html-indent": "off",
-  // 关闭此规则 使用 prettier 的格式化规则，
-  "vue/max-attributes-per-line": ["off"],
-  // 优先使用驼峰，navie-ui 组件除外
-  "vue/component-name-in-template-casing": [
-    "error",
-    "PascalCase",
-    {
-      ignores: ["/^n-/", "/^router-/"],
-      registeredComponentsOnly: false,
-    },
-  ],
   // 强制使用驼峰
   camelcase: ["error", { properties: "always" }],
 });

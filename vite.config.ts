@@ -50,4 +50,9 @@ export default defineConfig({
       "@": pathResolve("src"),
     },
   },
+  css: {
+    postcss: {
+      
+    }
+  }
 });

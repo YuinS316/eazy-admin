@@ -9,7 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.5"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.35.1",
@@ -23,11 +24,14 @@
     "eslint-plugin-vue": "^9.4.0",
     "naive-ui": "^2.33.1",
     "prettier": "^2.7.1",
+    "sass": "^1.54.6",
+    "sass-loader": "^13.0.2",
     "typescript": "^4.6.4",
     "unocss": "^0.45.13",
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.4",
     "vite": "^3.0.7",
+    "vue-eslint-parser": "^9.0.3",
     "vue-tsc": "^0.39.5"
   }
 }
