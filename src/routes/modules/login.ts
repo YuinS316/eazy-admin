@@ -17,18 +17,18 @@ const routes: RouteRecordRaw[] = [
         name: "Login",
         meta: {
           key: "Login",
-          title: "登录",
-          icon: HomeRound
-        },
-      },  
+          title: "登录"
+          // icon: HomeRound
+        }
+      },
       {
         path: "/register",
         component: () => import("@/pages/login/register/index.vue"),
         name: "Register",
         meta: {
           key: "Register",
-          title: "注册",
-          icon: HomeRound
+          title: "注册"
+          // icon: HomeRound
         }
       }
     ]

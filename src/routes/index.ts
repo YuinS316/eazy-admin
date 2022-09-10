@@ -1,26 +1,24 @@
-import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeRoutes from "./modules/home";
 import LoginRoutes from "./modules/login";
+import "vue-router";
+import { Component } from "vue";
 
-import 'vue-router';
-import { Component } from 'vue';
-
-declare module 'vue-router' {
+declare module "vue-router" {
   interface RouteMeta {
     key: string;
     title: string;
-    icon: Component;
+    icon?: Component;
+    show?: boolean;
+    [k: string]: any;
   }
 }
 
-export const routes: RouteRecordRaw[] = [
-  ...HomeRoutes,
-  ...LoginRoutes
-];
+export const routes: RouteRecordRaw[] = [...HomeRoutes, ...LoginRoutes];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes 
-})
+  routes
+});
 
 export default router;

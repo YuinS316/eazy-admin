@@ -2,13 +2,14 @@
 import Layout from "@/layout/index.vue";
 import { GlobalThemeOverrides } from "naive-ui";
 
-const themeOverrides:GlobalThemeOverrides = {}
-
+const themeOverrides: GlobalThemeOverrides = {};
 </script>
 
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
-    <Layout />
+    <n-loading-bar-provider>
+      <Layout />
+    </n-loading-bar-provider>
   </n-config-provider>
 </template>
 
