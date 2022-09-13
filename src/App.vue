@@ -2,7 +2,13 @@
 import Layout from "@/layout/index.vue";
 import { GlobalThemeOverrides } from "naive-ui";
 
-const themeOverrides: GlobalThemeOverrides = {};
+const themeOverrides: GlobalThemeOverrides = {
+  common: {
+    primaryColor: "#0560fd",
+    primaryColorHover: "#0560fd",
+    textColorBase: "#010517"
+  }
+};
 </script>
 
 <template>

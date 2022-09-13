@@ -6,7 +6,7 @@ import { transformRoutesToMenus, getRoutesMap } from "./utils";
 import { useDebounceFn } from "@vueuse/core";
 
 const sideBarStyle: CSSProperties = {
-  height: `calc(100vh - ${23}px)`,
+  height: `calc(100vh - ${48}px)`,
   background: "#fafbff"
 };
 

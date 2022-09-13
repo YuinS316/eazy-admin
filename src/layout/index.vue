@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { CSSProperties } from "vue";
 import SideBar from "./sideBar.vue";
+import Header from "./header.vue";
 import { useLoadingBar } from "naive-ui";
 
 const contentStyle: CSSProperties = {
@@ -23,7 +24,7 @@ router.afterEach(() => {
 <template>
   <div>
     <n-layout>
-      <n-layout-header>header</n-layout-header>
+      <Header />
 
       <n-layout has-sider>
         <side-bar />
@@ -43,6 +44,6 @@ router.afterEach(() => {
 
 <style scoped lang="scss">
 :deep(.n-scrollbar-container) {
-  height: calc(100vh - 23px);
+  height: calc(100vh - 48px);
 }
 </style>

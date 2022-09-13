@@ -31,7 +31,12 @@ export default defineConfig(async ({ command, mode }) => {
         ],
         rules: [
           // your custom rules
-        ]
+        ],
+        theme: {
+          colors: {
+            primary: "#0560fd"
+          }
+        }
       }),
       Components({
         resolvers: [NaiveUiResolver()]

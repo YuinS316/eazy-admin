@@ -1,11 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
-import { MenuOption, NIcon } from "naive-ui";
-import { Component } from "vue";
+import { MenuOption } from "naive-ui";
 import { RouterLink } from "vue-router";
-
-function renderIcon(icon: Component) {
-  return () => h(NIcon, null, { default: () => h(icon) });
-}
+import { renderIcon } from "@/shared/index";
 
 function renderRouterLink(route: RouteRecordRaw) {
   return () =>
