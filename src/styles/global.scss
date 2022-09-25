@@ -1,3 +1,21 @@
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --primary: #0560fd;
+}
+
+a {
+  text-decoration: none;
+
+  &:link,
+  &:visited {
+    color: var(--primary);
+  }
+
+  &:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+}

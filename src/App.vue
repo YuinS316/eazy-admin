@@ -6,7 +6,8 @@ const themeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: "#0560fd",
     primaryColorHover: "#0560fd",
-    textColorBase: "#010517"
+    textColorBase: "#010517",
+    borderRadius: "8px"
   }
 };
 </script>

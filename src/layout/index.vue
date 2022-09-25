@@ -6,7 +6,7 @@ import { useLoadingBar } from "naive-ui";
 
 const contentStyle: CSSProperties = {
   padding: "16px",
-  background: "#f0f2f7"
+  backgroundColor: "#f0f2f7"
 };
 
 const router = useRouter();
@@ -32,7 +32,6 @@ router.afterEach(() => {
         <n-layout-content
           :native-scrollbar="false"
           bordered
-          embedded
           :content-style="contentStyle"
         >
           <router-view></router-view>
@@ -45,5 +44,9 @@ router.afterEach(() => {
 <style scoped lang="scss">
 :deep(.n-scrollbar-container) {
   height: calc(100vh - 48px);
+}
+
+:deep(.n-layout-content) {
+  background-color: #f0f2f7;
 }
 </style>

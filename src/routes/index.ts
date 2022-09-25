@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { Component } from "vue";
+import "vue-router";
 import HomeRoutes from "./modules/home";
 import LoginRoutes from "./modules/login";
-import "vue-router";
-import { Component } from "vue";
-
+import ComponentRoutes from "./modules/comp";
 declare module "vue-router" {
   interface RouteMeta {
     key: string;
@@ -14,7 +14,11 @@ declare module "vue-router" {
   }
 }
 
-export const routes: RouteRecordRaw[] = [...HomeRoutes, ...LoginRoutes];
+export const routes: RouteRecordRaw[] = [
+  ...HomeRoutes,
+  ...LoginRoutes,
+  ...ComponentRoutes
+];
 
 const router = createRouter({
   history: createWebHistory(),

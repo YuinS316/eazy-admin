@@ -1,6 +1,10 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
+import {
+  createStyleImportPlugin,
+  VxeTableResolve
+} from "vite-plugin-style-import";
 import Unocss from "unocss/vite";
 import { presetAttributify, presetUno } from "unocss";
 import AutoImport from "unplugin-auto-import/vite";
@@ -40,6 +44,9 @@ export default defineConfig(async ({ command, mode }) => {
       }),
       Components({
         resolvers: [NaiveUiResolver()]
+      }),
+      createStyleImportPlugin({
+        resolves: [VxeTableResolve()]
       }),
       AutoImport({
         resolvers: [],
