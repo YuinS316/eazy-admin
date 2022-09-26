@@ -30,6 +30,16 @@ const routes: RouteRecordRaw[] = [
           title: "图表"
           // icon: HomeRound
         }
+      },
+      {
+        path: "/draggable",
+        component: () => import("@/pages/comp/draggable/index.vue"),
+        name: "Draggable",
+        meta: {
+          key: "Draggable",
+          title: "拖拽组件"
+          // icon: HomeRound
+        }
       }
     ]
   }
