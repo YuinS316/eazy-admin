@@ -40,6 +40,16 @@ const routes: RouteRecordRaw[] = [
           title: "拖拽组件"
           // icon: HomeRound
         }
+      },
+      {
+        path: "/editor",
+        component: () => import("@/pages/comp/editor/index.vue"),
+        name: "Editor",
+        meta: {
+          key: "Editor",
+          title: "markdown编辑器组件"
+          // icon: HomeRound
+        }
       }
     ]
   }

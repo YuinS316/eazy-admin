@@ -5,6 +5,7 @@ import {
   createStyleImportPlugin,
   VxeTableResolve
 } from "vite-plugin-style-import";
+import prismjs from "vite-plugin-prismjs";
 import Unocss from "unocss/vite";
 import { presetAttributify, presetUno } from "unocss";
 import AutoImport from "unplugin-auto-import/vite";
@@ -25,6 +26,9 @@ export default defineConfig(async ({ command, mode }) => {
   return {
     plugins: [
       vue(),
+      // prismjs({
+      //   languages: ["json", "typescript", "javascript", "css", "html"]
+      // }),
       Unocss({
         presets: [
           presetAttributify({
@@ -71,6 +75,9 @@ export default defineConfig(async ({ command, mode }) => {
         }
       })
     ],
+    optimizeDeps: {
+      include: ["@kangc/v-md-editor/lib/theme/vuepress.js"]
+    },
     resolve: {
       alias: {
         "@": pathResolve("src")
