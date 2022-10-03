@@ -1,11 +1,11 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
+import { viteMockServe } from "vite-plugin-mock";
 import {
   createStyleImportPlugin,
   VxeTableResolve
 } from "vite-plugin-style-import";
-import prismjs from "vite-plugin-prismjs";
 import Unocss from "unocss/vite";
 import { presetAttributify, presetUno } from "unocss";
 import AutoImport from "unplugin-auto-import/vite";
@@ -26,9 +26,6 @@ export default defineConfig(async ({ command, mode }) => {
   return {
     plugins: [
       vue(),
-      // prismjs({
-      //   languages: ["json", "typescript", "javascript", "css", "html"]
-      // }),
       Unocss({
         presets: [
           presetAttributify({
@@ -73,6 +70,12 @@ export default defineConfig(async ({ command, mode }) => {
           filepath: "./.eslintrc-auto-import.json",
           globalsPropValue: true
         }
+      }),
+      viteMockServe({
+        ignore: /^\_/,
+        mockPath: "mock",
+        localEnabled: command === "serve",
+        watchFiles: true
       })
     ],
     optimizeDeps: {

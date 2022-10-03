@@ -99,12 +99,32 @@ class BaseRequest {
         });
     });
   }
-}
 
-const baseRequest = new BaseRequest({
-  baseURL: "/mock",
-  timeout: 10000,
-  interceptors: {}
-});
+  get<T>(
+    url: string,
+    params?: Record<string, any>,
+    config?: BaseRequestConfig<T>
+  ): Promise<T> {
+    return this.request({
+      url,
+      method: "get",
+      params,
+      ...config
+    });
+  }
+
+  post<T>(
+    url: string,
+    data?: Record<string, any>,
+    config?: BaseRequestConfig<T>
+  ): Promise<T> {
+    return this.request({
+      url,
+      data,
+      method: "post",
+      ...config
+    });
+  }
+}
 
 export default BaseRequest;
