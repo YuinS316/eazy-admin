@@ -14,9 +14,7 @@ const themeOverrides: GlobalThemeOverrides = {
 
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
-    <n-loading-bar-provider>
-      <Layout />
-    </n-loading-bar-provider>
+    <Layout />
   </n-config-provider>
 </template>
 

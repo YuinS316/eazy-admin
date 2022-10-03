@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@antv/g2': ^4.2.8
   '@kangc/v-md-editor': ^2.3.15
+  '@types/nprogress': ^0.2.0
   '@types/prismjs': ^1.26.0
   '@typescript-eslint/eslint-plugin': ^5.35.1
   '@typescript-eslint/parser': ^5.35.1
@@ -20,6 +21,7 @@ specifiers:
   eslint-plugin-vue: ^9.4.0
   mockjs: ^1.1.0
   naive-ui: ^2.33.1
+  nprogress: ^0.2.0
   pkg-exports: ^0.1.2
   prettier: ^2.7.1
   prismjs: ^1.29.0
@@ -44,10 +46,12 @@ specifiers:
 dependencies:
   '@antv/g2': 4.2.8
   '@kangc/v-md-editor': 2.3.15_vue@3.2.37
+  '@types/nprogress': 0.2.0
   '@unocss/reset': 0.45.22
   '@vueuse/core': 9.2.0_vue@3.2.37
   axios: 0.27.2
   mockjs: 1.1.0
+  nprogress: 0.2.0
   pkg-exports: 0.1.2
   prismjs: 1.29.0
   vue: 3.2.37
@@ -751,6 +755,10 @@ packages:
 
   /@types/node/17.0.45:
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
+
+  /@types/nprogress/0.2.0:
+    resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
+    dev: false
 
   /@types/prismjs/1.26.0:
     resolution: {integrity: sha512-ZTaqn/qSqUuAq1YwvOFQfVW1AR/oQJlLSZVustdjwI+GZ8kr0MSHBj0tsXPW1EqHubx50gtBEjbPGsdZwQwCjQ==}
@@ -3951,6 +3959,10 @@ packages:
     dependencies:
       path-key: 3.1.1
     dev: true
+
+  /nprogress/0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
 
   /nth-check/2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}

@@ -1,4 +1,5 @@
 import axios, { AxiosResponse, AxiosRequestConfig, AxiosInstance } from "axios";
+import NProgress from "../nprogress/index";
 
 //  拦截器接口
 interface BaseRequestInterceptors<T = AxiosResponse> {
@@ -44,9 +45,11 @@ class BaseRequest {
   globalRequestInterceptor() {
     this.instance.interceptors.request.use(
       config => {
+        NProgress.start();
         return config;
       },
       error => {
+        NProgress.done();
         console.log("全局请求拦截失败", error);
         return Promise.reject(error);
       }
@@ -57,9 +60,11 @@ class BaseRequest {
   globalResponseInterceptor() {
     this.instance.interceptors.response.use(
       response => {
+        NProgress.done();
         return response.data;
       },
       error => {
+        NProgress.done();
         console.log("全局响应拦截失败", error);
         return Promise.reject(error);
       }

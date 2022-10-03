@@ -48,3 +48,18 @@
     }
   }
 }
+
+#nprogress {
+  & .bar {
+    background-color: var(--primary) !important;
+  }
+
+  & .peg {
+    box-shadow: 0 0 10px var(--primary), 0 0 5px var(--primary) !important;
+  }
+
+  & .spinner-icon {
+    border-top-color: var(--primary);
+    border-left-color: var(--primary);
+  }
+}

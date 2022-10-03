@@ -2,7 +2,8 @@
 import { CSSProperties } from "vue";
 import SideBar from "./sideBar.vue";
 import Header from "./header.vue";
-import { useLoadingBar } from "naive-ui";
+// import { useLoadingBar } from "naive-ui";
+import NProgress from "@/shared/nprogress";
 
 const contentStyle: CSSProperties = {
   padding: "16px",
@@ -10,14 +11,13 @@ const contentStyle: CSSProperties = {
 };
 
 const router = useRouter();
-const loadingBar = useLoadingBar();
 
 router.beforeEach(() => {
-  loadingBar.start();
+  NProgress.start();
 });
 
 router.afterEach(() => {
-  loadingBar.finish();
+  NProgress.done();
 });
 </script>
 
