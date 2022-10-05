@@ -29,6 +29,7 @@
     "@types/prismjs": "^1.26.0",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
+    "@unocss/transformer-directives": "^0.45.26",
     "@vicons/material": "^0.12.0",
     "@vicons/utils": "^0.1.4",
     "@vitejs/plugin-vue": "^3.0.3",
@@ -50,6 +51,7 @@
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-prismjs": "^0.0.8",
     "vite-plugin-style-import": "^2.0.0",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-eslint-parser": "^9.0.3",
     "vue-tsc": "^0.39.5"
   }

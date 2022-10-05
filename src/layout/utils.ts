@@ -31,13 +31,13 @@ export function transformRoutesToMenus(routes: RouteRecordRaw[]): MenuOption[] {
       tmp.icon = renderIcon(route.meta!.icon);
     }
 
-    if (route.children) {
+    if (route.children && tmp.show) {
       tmp.children = transformRoutesToMenus(route.children);
     } else {
       tmp.label = renderRouterLink(route);
     }
 
-    list.push(tmp);
+    tmp.show && list.push(tmp);
   }
 
   return list;

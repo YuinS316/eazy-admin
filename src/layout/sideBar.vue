@@ -23,10 +23,19 @@ const selectedMenu = ref("");
 
 const expandKeys = ref<string[]>([]);
 
-watch(route, val => {
-  selectedMenu.value = val.meta!.key;
-  menuRef.value?.showOption(selectedMenu.value);
-});
+watch(
+  route,
+  val => {
+    nextTick(() => {
+      selectedMenu.value = val.meta!.key;
+      console.log("???---", menuRef.value, val);
+      menuRef.value?.showOption(selectedMenu.value);
+    });
+  },
+  {
+    immediate: true
+  }
+);
 
 function handleUpdateValue(key: string, item: MenuOption) {
   // console.log("sel--", key, item);

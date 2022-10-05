@@ -1,9 +1,13 @@
 import { RouteRecordRaw } from "vue-router";
 import { HomeRound } from "@vicons/material";
+
+const Layout = () => import("@/layout/index.vue");
+
 const routes: RouteRecordRaw[] = [
   {
     path: "/component",
     name: "component_entry",
+    component: Layout,
     redirect: "/table",
     meta: {
       key: "component_entry",

@@ -5,7 +5,7 @@ import { GlobalThemeOverrides } from "naive-ui";
 const themeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: "#0560fd",
-    primaryColorHover: "#0560fd",
+    primaryColorHover: "rgba(5,96,253, 0.8)",
     textColorBase: "#010517",
     borderRadius: "8px"
   }
@@ -14,7 +14,8 @@ const themeOverrides: GlobalThemeOverrides = {
 
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
-    <Layout />
+    <!-- <Layout /> -->
+    <router-view />
   </n-config-provider>
 </template>
 

@@ -8,9 +8,11 @@ import {
 } from "vite-plugin-style-import";
 import Unocss from "unocss/vite";
 import { presetAttributify, presetUno } from "unocss";
+import transformerDirective from "@unocss/transformer-directives";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import { getExportsStatic } from "pkg-exports";
 
 const pathResolve = (dir: string): string => {
@@ -34,6 +36,8 @@ export default defineConfig(async ({ command, mode }) => {
           presetUno()
           // ...custom presets
         ],
+        //@ts-ignore
+        transformers: [transformerDirective()],
         rules: [
           // your custom rules
         ],
@@ -76,6 +80,10 @@ export default defineConfig(async ({ command, mode }) => {
         mockPath: "mock",
         localEnabled: command === "serve",
         watchFiles: true
+      }),
+      createSvgIconsPlugin({
+        iconDirs: [resolve(process.cwd(), "src/assets/svg")],
+        symbolId: "icon-[dir]-[name]"
       })
     ],
     optimizeDeps: {
