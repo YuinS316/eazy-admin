@@ -2,6 +2,10 @@
 import { isEmptyAfterTrim } from "@/shared/validate";
 import { FormRules, FormItemRule } from "naive-ui";
 import SvgIcon from "@/components/SvgIcon/index.vue";
+import { postLogin } from "@/api/mock/user";
+import { useMessage } from "naive-ui";
+
+const message = useMessage();
 
 const formRef = ref(null);
 const formValue = ref({
@@ -30,6 +34,27 @@ const rules: FormRules = {
     }
   }
 };
+
+async function serverLogin() {
+  const { data } = await postLogin(unref(formValue.value));
+  if (data) {
+    message.success("登录成功");
+    console.log("data---", data);
+  }
+}
+
+function handleLogin(e: MouseEvent) {
+  e.preventDefault();
+  //@ts-ignore
+  formRef.value?.validate(errors => {
+    if (!errors) {
+      serverLogin();
+    } else {
+      console.log("error--", errors);
+      message.error(errors[0][0].message);
+    }
+  });
+}
 </script>
 
 <template>
@@ -38,7 +63,7 @@ const rules: FormRules = {
       <h1 class="text-white">Eazy Admin</h1>
     </div>
 
-    <div class="self-center">
+    <div class="justify-self-center self-center">
       <SvgIcon name="BrainStorm" class="!w-400px h-250px" />
       <div class="text-white text-2xl mt-16px ml-8px">
         简易的开箱即用的中后台管理系统
@@ -69,7 +94,9 @@ const rules: FormRules = {
         还没有账号？ <span class="text-primary cursor-pointer">去注册</span>
       </div>
 
-      <n-button class="w-full" type="primary">登录</n-button>
+      <n-button class="w-full" type="primary" @click="handleLogin"
+        >登录</n-button
+      >
     </div>
   </div>
 </template>

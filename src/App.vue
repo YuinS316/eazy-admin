@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Layout from "@/layout/index.vue";
 import { GlobalThemeOverrides } from "naive-ui";
 
 const themeOverrides: GlobalThemeOverrides = {
@@ -14,8 +13,12 @@ const themeOverrides: GlobalThemeOverrides = {
 
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
+    <n-message-provider>
+      <n-notification-provider>
+        <router-view />
+      </n-notification-provider>
+    </n-message-provider>
     <!-- <Layout /> -->
-    <router-view />
   </n-config-provider>
 </template>
 

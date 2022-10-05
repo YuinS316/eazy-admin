@@ -1,5 +1,8 @@
 import axios, { AxiosResponse, AxiosRequestConfig, AxiosInstance } from "axios";
 import NProgress from "../nprogress/index";
+import { createDiscreteApi } from "naive-ui";
+import { MessageApiInjection } from "naive-ui/es/message/src/MessageProvider";
+import { NotificationApiInjection } from "naive-ui/es/notification/src/NotificationProvider";
 
 //  拦截器接口
 interface BaseRequestInterceptors<T = AxiosResponse> {
@@ -22,16 +25,32 @@ class BaseRequest {
   instance: AxiosInstance;
   interceptors?: BaseRequestInterceptors;
 
+  message!: MessageApiInjection;
+  notification!: NotificationApiInjection;
+
   constructor(config: BaseRequestConfig) {
     this.instance = axios.create(config);
 
     this.interceptors = config.interceptors;
+
+    this.injectComponent();
 
     //  全局拦截
     this.globalInterceptor();
 
     //  实例级别的拦截器
     this.instanceInterceptor();
+  }
+
+  //  注入navie-ui的一些全局方法
+  injectComponent() {
+    const { message, notification } = createDiscreteApi([
+      "message",
+      "notification"
+    ]);
+
+    this.message = message;
+    this.notification = notification;
   }
 
   globalInterceptor() {
@@ -65,6 +84,7 @@ class BaseRequest {
       },
       error => {
         NProgress.done();
+        this.message.error(error.message);
         console.log("全局响应拦截失败", error);
         return Promise.reject(error);
       }
@@ -118,9 +138,9 @@ class BaseRequest {
     });
   }
 
-  post<T>(
+  post<T, U = Record<string, any>>(
     url: string,
-    data?: Record<string, any>,
+    data?: U,
     config?: BaseRequestConfig<T>
   ): Promise<T> {
     return this.request({
