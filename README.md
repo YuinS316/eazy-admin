@@ -1,16 +1,64 @@
-# Vue 3 + TypeScript + Vite
+# Eazy Admin
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Eazy = easy for lazy
 
-## Recommended IDE Setup
+Eazy Admin 是一个免费开源的中后台模板。使用了最新的 `vue3`、`vite3`、`typescript` 等主流技术，简单易懂的中后台前端解决方案，供学习参考。
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+## 技术栈
 
-## Type Support For `.vue` Imports in TS
+- [vue3](https://cn.vuejs.org/)
+- [vite3](https://cn.vitejs.dev/)
+- [unocss](https://github.com/unocss/unocss)
+- [navie ui](https://www.naiveui.com/zh-CN/os-theme)
+- [pinia](https://pinia.vuejs.org/zh/)
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+## 功能
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+- 路由
+  - [x] 路由配置自动生成菜单
+  - [ ] 后端返回路由表
+- 权限功能
+  - [ ] 按钮权限
+  - [ ] 路由权限
+- 二次封装
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+  - [x] axios: 可对接口和实例单独配置拦截器，并有健全的类型提示
+  - [x] storage: 对 `loalStorage` 和 `sessionStorage` 封装，根据 `prefix` 配置命名空间 和 储存时设置过期时间
+  - [ ] cookie
+
+- 打包
+
+  - [ ] 区分环境
+  - [ ] 优化体积
+
+- 其他功能
+  - [ ] 一键换肤
+  - [ ] 国际化
+  - [x] mock
+
+## 安装使用
+
+- 获取项目代码
+
+```
+https://github.com/YuinS316/eazy-admin.git
+```
+
+- 安装依赖
+
+```
+cd eazy-admin
+pnpm install
+```
+
+- 运行
+
+```
+pnpm serve
+```
+
+- 打包
+
+```
+pnpm build
+```

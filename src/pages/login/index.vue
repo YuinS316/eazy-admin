@@ -4,6 +4,7 @@ import { FormRules, FormItemRule } from "naive-ui";
 import SvgIcon from "@/components/SvgIcon/index.vue";
 import { postLogin } from "@/api/mock/user";
 import { useMessage } from "naive-ui";
+import { ILocalStorage } from "@/shared/storage";
 
 const message = useMessage();
 
@@ -12,6 +13,9 @@ const formValue = ref({
   account: "",
   password: ""
 });
+
+const userStorage = new ILocalStorage("user");
+
 const rules: FormRules = {
   account: {
     required: true,
@@ -37,9 +41,11 @@ const rules: FormRules = {
 
 async function serverLogin() {
   const { data } = await postLogin(unref(formValue.value));
+  console.log("before--", userStorage.getItem("info"));
   if (data) {
     message.success("登录成功");
     console.log("data---", data);
+    userStorage.setItem("info", data, "3d");
   }
 }
 
@@ -66,7 +72,10 @@ function handleLogin(e: MouseEvent) {
     <div class="justify-self-center self-center">
       <SvgIcon name="BrainStorm" class="!w-400px h-250px" />
       <div class="text-white text-2xl mt-16px ml-8px">
-        简易的开箱即用的中后台管理系统
+        简单易懂的中后台管理系统
+      </div>
+      <div class="text-white text-2xl mt-16px ml-8px text-right">
+        Eazy = Easy for lazy
       </div>
     </div>
 

@@ -23,6 +23,7 @@ specifiers:
   mockjs: ^1.1.0
   naive-ui: ^2.33.1
   nprogress: ^0.2.0
+  pinia: ^2.0.22
   pkg-exports: ^0.1.2
   prettier: ^2.7.1
   prismjs: ^1.29.0
@@ -54,6 +55,7 @@ dependencies:
   axios: 0.27.2
   mockjs: 1.1.0
   nprogress: 0.2.0
+  pinia: 2.0.22_bw4xur2vyhvhfd4whxbr7emp4u
   pkg-exports: 0.1.2
   prismjs: 1.29.0
   vue: 3.2.37
@@ -4352,6 +4354,24 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  /pinia/2.0.22_bw4xur2vyhvhfd4whxbr7emp4u:
+    resolution: {integrity: sha512-u+b8/BC+tmvo3ACbYO2w5NfxHWFOjvvw9DQnyT0dW8aUMCPRQT5QnfZ5R5W2MzZBMTeZRMQI7V/QFbafmM9QHw==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.2.1
+      typescript: 4.8.2
+      vue: 3.2.37
+      vue-demi: 0.13.11_vue@3.2.37
+    dev: false
+
   /pkg-exports/0.1.2:
     resolution: {integrity: sha512-DNo5W2zrmwbRywhrQ54P3nUJ0Q6QOKDenWkC0YnqAWiqTJy6B64fjQqFar/dD3GsXbFPN9O1yOgLNR8cGcInbw==}
     dependencies:
@@ -5015,7 +5035,6 @@ packages:
     resolution: {integrity: sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /uc.micro/1.0.6:
     resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
