@@ -35,6 +35,7 @@ router.afterEach(() => {
           :content-style="contentStyle"
         >
           <router-view></router-view>
+          <n-back-top :right="30" />
         </n-layout-content>
       </n-layout>
     </n-layout>

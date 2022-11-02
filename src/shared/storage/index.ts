@@ -7,6 +7,7 @@ class IStorage {
       local === "local" ? window.localStorage : window.sessionStorage;
   }
 
+  //  初始化的时候回去判断一下是否过期，过期了就返回null
   init() {
     Object.keys(this.instance).forEach(item => {
       if (item.startsWith(this.keyPrefix)) {
@@ -107,7 +108,7 @@ class IStorage {
 }
 
 export class ILocalStorage extends IStorage {
-  constructor(keyPrefix: string) {
+  constructor(keyPrefix: KeyPrefixEnum) {
     super("local");
     this.keyPrefix = keyPrefix;
     this.init();
@@ -115,11 +116,17 @@ export class ILocalStorage extends IStorage {
 }
 
 export class ISessionStorage extends IStorage {
-  constructor(keyPrefix: string) {
+  constructor(keyPrefix: KeyPrefixEnum) {
     super("session");
     this.keyPrefix = keyPrefix;
     this.init();
   }
+}
+
+//  可传入的keyPrefix
+export const enum KeyPrefixEnum {
+  GLOBAL = "global_",
+  USER = "user_"
 }
 
 export default IStorage;

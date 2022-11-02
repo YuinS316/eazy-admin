@@ -2,9 +2,8 @@
 import { isEmptyAfterTrim } from "@/shared/validate";
 import { FormRules, FormItemRule } from "naive-ui";
 import SvgIcon from "@/components/SvgIcon/index.vue";
-import { postLogin } from "@/api/mock/user";
 import { useMessage } from "naive-ui";
-import { ILocalStorage } from "@/shared/storage";
+import { useUserStore } from "@/store/modules/user";
 
 const message = useMessage();
 
@@ -14,7 +13,9 @@ const formValue = ref({
   password: ""
 });
 
-const userStorage = new ILocalStorage("user");
+const userStore = useUserStore();
+
+const router = useRouter();
 
 const rules: FormRules = {
   account: {
@@ -40,12 +41,11 @@ const rules: FormRules = {
 };
 
 async function serverLogin() {
-  const { data } = await postLogin(unref(formValue.value));
-  console.log("before--", userStorage.getItem("info"));
-  if (data) {
-    message.success("登录成功");
-    console.log("data---", data);
-    userStorage.setItem("info", data, "3d");
+  let isSuccess = await userStore.userLogin(unref(formValue.value));
+  if (isSuccess) {
+    router.push({
+      name: "Home"
+    });
   }
 }
 
@@ -94,6 +94,8 @@ function handleLogin(e: MouseEvent) {
         <n-form-item label="密码" path="password">
           <n-input
             v-model:value="formValue.password"
+            type="password"
+            show-password-on="click"
             placeholder="请输入密码"
           />
         </n-form-item>
