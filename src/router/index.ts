@@ -8,7 +8,8 @@ const routes: RouteRecordRaw[] = [
     name: "Root",
     component: LayoutMain,
     redirect: {
-      name: "Project"
+      // name: "Project"
+      name: "Editor"
     },
     children: [modules.projectRoutes, modules.editorRoutes]
   }

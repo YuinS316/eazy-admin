@@ -15,18 +15,18 @@ const pathResolve = (dir: string): string => {
 export default defineConfig({
   plugins: [
     vue(),
-    Unocss({
-      presets: [
-        presetAttributify({
-          /* preset options */
-        }),
-        presetUno()
-        // ...custom presets
-      ],
-      rules: [
-        // your custom rules
-      ]
-    }),
+    // Unocss({
+    //   presets: [
+    //     presetAttributify({
+    //       /* preset options */
+    //     }),
+    //     presetUno()
+    //     // ...custom presets
+    //   ],
+    //   rules: [
+    //     // your custom rules
+    //   ]
+    // }),
     Components({
       resolvers: [NaiveUiResolver()]
     }),
