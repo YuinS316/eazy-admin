@@ -37,6 +37,12 @@ const { addComponentData } = editorStore;
 const composeStore = useComposeStore();
 const { editorRef } = storeToRefs(composeStore);
 
+/**
+ *
+ * 将物料组件从物料库拖拽到画布时的操作
+ *
+ * @param e
+ */
 const handleDrop = (e: DragEvent) => {
   e.preventDefault();
   e.stopPropagation();
@@ -72,10 +78,6 @@ const handleDragOver = (e: DragEvent) => {
   //  必须加这个，会跟drop冲突
   e.preventDefault();
   e.dataTransfer!.dropEffect = "copy";
-};
-
-const handleMouseDown = (e: MouseEvent) => {
-  e.stopPropagation();
 };
 </script>
 

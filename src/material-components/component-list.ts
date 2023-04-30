@@ -4,11 +4,13 @@ const commonStyle = {
   rotate: 0
 };
 
+//  公共属性
 const commonAttr = {
   //  是否锁定
   isLock: false
 };
 
+//  默认配置列表
 const list = [
   {
     component: "EzButton",

@@ -5,7 +5,7 @@
       :index="index"
       :element="item"
       :defaultStyle="item.style"
-      :style="getStyle(item.style)"
+      :style="getShapeStyle(item.style)"
       :key="item.id"
     >
       <component
@@ -22,7 +22,7 @@
 import { useEditorStore } from "@/store";
 import { useComposeStore } from "@/store/compose";
 import { storeToRefs } from "pinia";
-import { getStyle } from "@/utils/style";
+import { getStyle, getShapeStyle } from "@/utils/style";
 import { Recordable } from "@/types/typing";
 import Shape from "./Shape.vue";
 
@@ -36,43 +36,8 @@ const editorRef = ref<HTMLDivElement>();
 const { setEditorRef } = composeStore;
 
 const getComponentStyle = (style: Recordable) => {
-  return getStyle({ ...style, position: "absolute" });
-};
-
-const handleMouseDown = (
-  e: MouseEvent,
-  component: Recordable,
-  index: number
-) => {
-  if (!currentComponent.value) {
-    e.preventDefault();
-  }
-
-  setCurrentComponent(component, index);
-
-  const pos = { ...component.style };
-  const startX = e.clientX;
-  const startY = e.clientY;
-
-  const startLeft = +pos.left;
-  const startTop = +pos.top;
-
-  const move = (ev: MouseEvent) => {
-    const currentX = ev.clientX;
-    const currentY = ev.clientY;
-    pos.left = currentX - startX + startLeft;
-    pos.top = currentY - startY + startTop;
-
-    setShapeStyle(pos);
-  };
-
-  const up = () => {
-    document.removeEventListener("mousemove", move);
-    document.removeEventListener("mouseup", up);
-  };
-
-  document.addEventListener("mousemove", move);
-  document.addEventListener("mouseup", up);
+  const filterArrs = ["width", "height", "top", "left", "rotate"];
+  return getStyle({ ...style }, filterArrs);
 };
 
 onMounted(() => {

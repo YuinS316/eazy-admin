@@ -1,5 +1,5 @@
 <template>
-  <div class="shape" @mousedown="handleMouseDown($event)">
+  <div class="shape" @mousedown="handleMouseDownOnShape($event)">
     <slot></slot>
   </div>
 </template>
@@ -28,7 +28,7 @@ const editorRef = ref<HTMLDivElement>();
 
 const { setEditorRef } = composeStore;
 
-const handleMouseDown = (e: MouseEvent) => {
+const handleMouseDownOnShape = (e: MouseEvent) => {
   // if (!currentComponent.value) {
   //   e.preventDefault();
   // }
