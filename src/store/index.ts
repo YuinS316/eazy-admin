@@ -1,15 +1,27 @@
 import { Recordable } from "@/types/typing";
+import { isObject, isString } from "@/utils/type";
 import { createPinia, defineStore } from "pinia";
 import type { App } from "vue";
 
 const pinia = createPinia();
 
-interface ShapeStyle {
+interface IShapeStyle {
   top?: number;
   left?: number;
   width?: number;
   height?: number;
   rotate?: number;
+}
+
+interface ICanvasStyleData {
+  width: number;
+  height: number;
+  scale: number;
+  color: string;
+  opacity: number;
+  background: string;
+  fontSize: number;
+  [k: string]: any;
 }
 
 export const useEditorStore = defineStore("editor", () => {
@@ -33,13 +45,36 @@ export const useEditorStore = defineStore("editor", () => {
     currentComponentIndex.value = index;
   }
 
-  function setShapeStyle(shapeStyle: ShapeStyle) {
+  function setShapeStyle(shapeStyle: IShapeStyle) {
     for (const key in shapeStyle) {
-      let value = shapeStyle[key as keyof ShapeStyle];
+      let value = shapeStyle[key as keyof IShapeStyle];
 
       if (value !== undefined && currentComponent.value) {
         currentComponent.value.style[key] = value;
       }
+    }
+  }
+
+  //  页面布局数据
+  const canvasStyleData = ref<ICanvasStyleData>({
+    width: 1280,
+    height: 900,
+    scale: 100,
+    color: "#000",
+    opacity: 1,
+    background: "#fff",
+    fontSize: 14
+  });
+
+  function setCanvasStyleData(key: string, val: unknown): void;
+  function setCanvasStyleData(value: Recordable, _: undefined): void;
+  function setCanvasStyleData(key: unknown, val: unknown): void {
+    if (isObject<ICanvasStyleData>(key)) {
+      canvasStyleData.value = key;
+    } else if (isString(key)) {
+      canvasStyleData.value[key] = val;
+    } else {
+      throw new Error("设置canvasStyle格式出错");
     }
   }
 
@@ -49,7 +84,9 @@ export const useEditorStore = defineStore("editor", () => {
     currentComponent,
     currentComponentIndex,
     setCurrentComponent,
-    setShapeStyle
+    setShapeStyle,
+    canvasStyleData,
+    setCanvasStyleData
   };
 });
 

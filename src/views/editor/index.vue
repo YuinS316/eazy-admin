@@ -16,7 +16,9 @@
       </section>
 
       <!-- 属性设置库 -->
-      <section class="right">right</section>
+      <section class="right">
+        <AttrForm></AttrForm>
+      </section>
     </main>
   </div>
 </template>
@@ -25,6 +27,7 @@
 import ComponentList from "@/components/ComponentList.vue";
 import ToolBar from "@/components/ToolBar.vue";
 import Editor from "@/components/Editor/index.vue";
+import AttrForm from "@/components/AttrForm/index.vue";
 import componentList from "@/material-components/component-list";
 import { useEditorStore } from "@/store";
 import { storeToRefs } from "pinia";
@@ -89,7 +92,7 @@ $center-pd: 16px;
 
 $left-width: 184px;
 
-$right-width: 200px;
+$right-width: 320px;
 
 .container {
   height: 100vh;
