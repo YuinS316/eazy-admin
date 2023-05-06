@@ -23,15 +23,15 @@ const list = [
       width: 100,
       height: 34,
       borderWidth: 1,
-      borderColor: "",
-      borderRadius: "",
-      fontSize: "",
+      borderColor: "#fff",
+      borderRadius: 0,
+      fontSize: 14,
       fontWeight: 400,
-      lineHeight: "",
+      lineHeight: 0,
       letterSpacing: 0,
-      textAlign: "",
-      color: "",
-      backgroundColor: ""
+      textAlign: "center",
+      color: "#000",
+      backgroundColor: "#fff"
     }
   }
 ];

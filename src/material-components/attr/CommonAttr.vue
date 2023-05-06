@@ -16,6 +16,7 @@
               <n-color-picker
                 v-if="type === 'color-picker'"
                 v-model:value="currentComponent.style[key]"
+                :actions="['confirm', 'clear']"
               ></n-color-picker>
               <n-input-number
                 v-if="type === 'input-number'"
@@ -25,6 +26,11 @@
                 v-if="type === 'input'"
                 v-model:value="currentComponent.style[key]"
               ></n-input>
+              <n-select
+                v-if="type === 'select'"
+                v-model:value="currentComponent.style[key]"
+                :options="optionMap[key as keyof typeof optionMap]"
+              ></n-select>
             </template>
           </n-form-item>
         </n-form>
@@ -39,7 +45,7 @@
 <script setup lang="ts">
 import { useEditorStore } from "@/store";
 import { storeToRefs } from "pinia";
-import { styleData } from "@/utils/attr";
+import { styleData, optionMap } from "@/utils/attr";
 
 const editorStore = useEditorStore();
 const { componentData, currentComponent } = storeToRefs(editorStore);
@@ -66,4 +72,11 @@ const formRenderList = computed(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.n-collapse {
+  padding: 0 16px;
+}
+.n-input-number {
+  width: 100%;
+}
+</style>

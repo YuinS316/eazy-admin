@@ -2,6 +2,8 @@
   <div id="editor" class="editor" ref="editorRef">
     <Shape
       v-for="(item, index) in componentData"
+      :class="{ shape__active: currentComponent === item }"
+      :active="currentComponent === item"
       :index="index"
       :element="item"
       :defaultStyle="item.style"

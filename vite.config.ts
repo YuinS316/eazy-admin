@@ -53,8 +53,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        javascriptEnabled: true,
-        additionalData: `@import "src/styles/index.scss";`
+        javascriptEnabled: true
+        // additionalData: `@import "src/styles/index.scss";`
       }
     }
   }

@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 // import "uno.css";
+import "./styles/index.scss";
 import App from "./App.vue";
 import { router } from "./router";
 import MaterialComponentRegister from "./material-components";

@@ -55,6 +55,12 @@ export const useEditorStore = defineStore("editor", () => {
     }
   }
 
+  //  是否点击了组件
+  const isClickComponent = ref(false);
+  function setIsClickComponent(status: boolean) {
+    isClickComponent.value = status;
+  }
+
   //  页面布局数据
   const canvasStyleData = ref<ICanvasStyleData>({
     width: 1280,
@@ -86,7 +92,9 @@ export const useEditorStore = defineStore("editor", () => {
     setCurrentComponent,
     setShapeStyle,
     canvasStyleData,
-    setCanvasStyleData
+    setCanvasStyleData,
+    isClickComponent,
+    setIsClickComponent
   };
 });
 

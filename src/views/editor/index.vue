@@ -10,7 +10,13 @@
 
       <!-- 画布部分 -->
       <section class="center">
-        <div class="content" @dragover="handleDragOver" @drop="handleDrop">
+        <div
+          class="content"
+          @dragover="handleDragOver"
+          @drop="handleDrop"
+          @mousedown="handleMouseDown"
+          @mouseup="handleMouseUp"
+        >
           <Editor></Editor>
         </div>
       </section>
@@ -35,7 +41,9 @@ import { cloneDeep } from "lodash-es";
 import { useComposeStore } from "@/store/compose";
 
 const editorStore = useEditorStore();
-const { addComponentData } = editorStore;
+const { isClickComponent } = storeToRefs(editorStore);
+const { addComponentData, setIsClickComponent, setCurrentComponent } =
+  editorStore;
 
 const composeStore = useComposeStore();
 const { editorRef } = storeToRefs(composeStore);
@@ -81,6 +89,17 @@ const handleDragOver = (e: DragEvent) => {
   //  必须加这个，会跟drop冲突
   e.preventDefault();
   e.dataTransfer!.dropEffect = "copy";
+};
+
+const handleMouseDown = (e: MouseEvent) => {
+  e.stopPropagation();
+  setIsClickComponent(false);
+};
+
+const handleMouseUp = (e: MouseEvent) => {
+  if (!isClickComponent.value) {
+    setCurrentComponent({}, -1);
+  }
 };
 </script>
 
