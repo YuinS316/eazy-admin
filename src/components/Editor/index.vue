@@ -1,5 +1,10 @@
 <template>
-  <div id="editor" class="editor" ref="editorRef">
+  <div
+    id="editor"
+    class="editor"
+    ref="editorRef"
+    @contextmenu="handleOpenContextMenu"
+  >
     <Shape
       v-for="(item, index) in componentData"
       :class="{ shape__active: currentComponent === item }"
@@ -11,25 +16,28 @@
       :key="item.id"
     >
       <component
+        class="component"
         :style="getComponentStyle(item.style)"
         :is="item.component"
         :id="'component' + item.id"
         :propValue="item.propValue"
       ></component>
     </Shape>
+    <ContextMenu></ContextMenu>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useEditorStore } from "@/store";
 import { useComposeStore } from "@/store/compose";
+import { useContextMenuStore } from "@/store/contextMenu";
 import { storeToRefs } from "pinia";
 import { getStyle, getShapeStyle } from "@/utils/style";
 import { Recordable } from "@/types/typing";
 import Shape from "./Shape.vue";
+import ContextMenu from "./ContxtMenu.vue";
 
 const editorStore = useEditorStore();
-const { setShapeStyle, setCurrentComponent } = editorStore;
 const { componentData, currentComponent } = storeToRefs(editorStore);
 
 const composeStore = useComposeStore();
@@ -45,6 +53,9 @@ const getComponentStyle = (style: Recordable) => {
 onMounted(() => {
   setEditorRef(editorRef.value!);
 });
+
+const contextMenuStore = useContextMenuStore();
+const { handleOpenContextMenu } = contextMenuStore;
 </script>
 
 <style scoped lang="scss">
@@ -55,5 +66,11 @@ onMounted(() => {
 
   width: 100%;
   height: 100%;
+
+  .component {
+    outline: none;
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

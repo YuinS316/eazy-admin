@@ -1,3 +1,5 @@
+import { Recordable } from "@/types/typing";
+
 //  公共样式
 const commonStyle = {
   opacity: 1,
@@ -11,7 +13,7 @@ const commonAttr = {
 };
 
 //  默认配置列表
-const list = [
+const list: Array<Recordable> = [
   {
     component: "EzButton",
     label: "按钮",
@@ -23,14 +25,14 @@ const list = [
       width: 100,
       height: 34,
       borderWidth: 1,
-      borderColor: "#fff",
+      borderColor: "#dcdfe6",
       borderRadius: 0,
       fontSize: 14,
       fontWeight: 400,
       lineHeight: 0,
       letterSpacing: 0,
       textAlign: "center",
-      color: "#000",
+      color: "#606266",
       backgroundColor: "#fff"
     }
   }

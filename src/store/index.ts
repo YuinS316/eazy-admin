@@ -40,7 +40,7 @@ export const useEditorStore = defineStore("editor", () => {
   const currentComponent = ref<Recordable | null>(null);
   const currentComponentIndex = ref<number | null>(null);
 
-  function setCurrentComponent(component: Recordable, index: number) {
+  function setCurrentComponent(component: Recordable | null, index: number) {
     currentComponent.value = component;
     currentComponentIndex.value = index;
   }

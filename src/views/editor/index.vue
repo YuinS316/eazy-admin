@@ -39,6 +39,7 @@ import { useEditorStore } from "@/store";
 import { storeToRefs } from "pinia";
 import { cloneDeep } from "lodash-es";
 import { useComposeStore } from "@/store/compose";
+import { generateId } from "@/utils/id";
 
 const editorStore = useEditorStore();
 const { isClickComponent } = storeToRefs(editorStore);
@@ -81,7 +82,11 @@ const handleDrop = (e: DragEvent) => {
     let { top, left } = computeComponentPosition();
     component.style.left = left;
     component.style.top = top;
+    component.id = generateId();
     addComponentData(component);
+
+    setIsClickComponent(true);
+    setCurrentComponent(component, +index);
   }
 };
 
@@ -98,7 +103,7 @@ const handleMouseDown = (e: MouseEvent) => {
 
 const handleMouseUp = (e: MouseEvent) => {
   if (!isClickComponent.value) {
-    setCurrentComponent({}, -1);
+    setCurrentComponent(null, -1);
   }
 };
 </script>

@@ -6,6 +6,8 @@ import { presetAttributify, presetUno } from "unocss";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import { visualizer } from "rollup-plugin-visualizer";
+import compress from "vite-plugin-compress";
 
 const pathResolve = (dir: string): string => {
   return resolve(__dirname, ".", dir);
@@ -15,6 +17,8 @@ const pathResolve = (dir: string): string => {
 export default defineConfig({
   plugins: [
     vue(),
+    // compress(),
+    visualizer(),
     // Unocss({
     //   presets: [
     //     presetAttributify({
@@ -28,6 +32,7 @@ export default defineConfig({
     //   ]
     // }),
     Components({
+      dts: true,
       resolvers: [NaiveUiResolver()]
     }),
     AutoImport({
@@ -55,6 +60,18 @@ export default defineConfig({
       scss: {
         javascriptEnabled: true
         // additionalData: `@import "src/styles/index.scss";`
+      }
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // 将 node_modules 中的代码单独打包成一个 JS 文件
+          if (id.includes("node_modules")) {
+            return "vendor";
+          }
+        }
       }
     }
   }
