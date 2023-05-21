@@ -1,7 +1,8 @@
 import { Recordable } from "@/types/typing";
-import { isObject, isString } from "@/utils/type";
+import { isNumber, isObject, isString } from "@/utils/type";
 import { createPinia, defineStore } from "pinia";
 import type { App } from "vue";
+import { swap } from "@/utils/index";
 
 const pinia = createPinia();
 
@@ -28,6 +29,7 @@ export const useEditorStore = defineStore("editor", () => {
   //  画布中的组件列表
   const componentData = ref<Recordable[]>([]);
 
+  //  画布中添加组件
   function addComponentData(component: Recordable, index?: number) {
     if (index !== undefined) {
       componentData.value.splice(index, 0, component);
@@ -38,13 +40,16 @@ export const useEditorStore = defineStore("editor", () => {
 
   //  当前选中的组件
   const currentComponent = ref<Recordable | null>(null);
+  //  当前选中的组件的序号
   const currentComponentIndex = ref<number | null>(null);
 
+  //  设置当前组件
   function setCurrentComponent(component: Recordable | null, index: number) {
     currentComponent.value = component;
     currentComponentIndex.value = index;
   }
 
+  //  设置当前组件的样式
   function setShapeStyle(shapeStyle: IShapeStyle) {
     for (const key in shapeStyle) {
       let value = shapeStyle[key as keyof IShapeStyle];
@@ -61,7 +66,78 @@ export const useEditorStore = defineStore("editor", () => {
     isClickComponent.value = status;
   }
 
-  //  页面布局数据
+  // ======== 删除组件 ===============
+  function deleteComponent() {
+    if (isNumber(currentComponentIndex.value)) {
+      let index = currentComponentIndex.value;
+      componentData.value.splice(index, 1);
+      currentComponent.value = null;
+    }
+  }
+
+  // ======== 组件的层级移动 ==========
+
+  //  上移，对于index来说就更加靠后
+  function moveUpComponent() {
+    if (isNumber(currentComponentIndex.value)) {
+      let index = currentComponentIndex.value;
+      if (index < componentData.value.length - 1) {
+        swap(componentData.value, index, index + 1);
+        currentComponentIndex.value = index + 1;
+      } else {
+        window.$message.warning("已经到顶了");
+      }
+    }
+  }
+
+  //  下移
+  function moveDownComponent() {
+    if (isNumber(currentComponentIndex.value)) {
+      let index = currentComponentIndex.value;
+      if (index > 0) {
+        swap(componentData.value, index, index - 1);
+        currentComponentIndex.value = index - 1;
+      } else {
+        window.$message.warning("已经到底了");
+      }
+    }
+  }
+
+  //  置顶
+  function moveTopComponent() {
+    if (isNumber(currentComponentIndex.value)) {
+      let index = currentComponentIndex.value;
+      let finalIndex = componentData.value.length - 1;
+      if (index < finalIndex) {
+        componentData.value.splice(index, 1);
+        if (currentComponent.value) {
+          componentData.value.push(currentComponent.value);
+        }
+        currentComponentIndex.value = finalIndex;
+      } else {
+        window.$message.warning("已经到顶了");
+      }
+    }
+  }
+
+  //  置底
+  function moveBottomComponent() {
+    if (isNumber(currentComponentIndex.value)) {
+      let index = currentComponentIndex.value;
+      let firstIndex = 0;
+      if (index > firstIndex) {
+        componentData.value.splice(index, 1);
+        if (currentComponent.value) {
+          componentData.value.unshift(currentComponent.value);
+        }
+        currentComponentIndex.value = firstIndex;
+      } else {
+        window.$message.warning("已经到底了");
+      }
+    }
+  }
+
+  // ======== 页面布局数据 ========
   const canvasStyleData = ref<ICanvasStyleData>({
     width: 1280,
     height: 900,
@@ -94,7 +170,12 @@ export const useEditorStore = defineStore("editor", () => {
     canvasStyleData,
     setCanvasStyleData,
     isClickComponent,
-    setIsClickComponent
+    setIsClickComponent,
+    moveUpComponent,
+    moveDownComponent,
+    moveTopComponent,
+    moveBottomComponent,
+    deleteComponent
   };
 });
 

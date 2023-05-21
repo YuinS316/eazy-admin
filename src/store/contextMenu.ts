@@ -81,6 +81,15 @@ const selectedOptions = [
 //  右键菜单管理
 export const useContextMenuStore = defineStore("contextMenu", () => {
   const editorStore = useEditorStore();
+
+  const {
+    moveUpComponent,
+    moveDownComponent,
+    moveTopComponent,
+    moveBottomComponent,
+    deleteComponent
+  } = editorStore;
+
   const { currentComponent } = storeToRefs(editorStore);
 
   const x = ref(0);
@@ -92,7 +101,36 @@ export const useContextMenuStore = defineStore("contextMenu", () => {
 
   //  选中里面的某一项
   function handleClickContentMenuItem(key: string) {
-    console.log("key--", key);
+    switch (key) {
+      case "moveUp": {
+        moveUpComponent();
+        break;
+      }
+
+      case "moveDown": {
+        moveDownComponent();
+        break;
+      }
+
+      case "moveTop": {
+        moveTopComponent();
+        break;
+      }
+
+      case "moveBottom": {
+        moveBottomComponent();
+        break;
+      }
+
+      case "delete": {
+        deleteComponent();
+        break;
+      }
+
+      default: {
+        break;
+      }
+    }
 
     visible.value = false;
   }

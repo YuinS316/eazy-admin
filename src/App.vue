@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import type { GlobalTheme, GlobalThemeOverrides } from "naive-ui";
-import { zhCN, dateZhCN } from "naive-ui";
-const theme = ref<GlobalTheme | null>(null);
+import {
+  useDialog,
+  useLoadingBar,
+  useMessage,
+  useNotification
+} from "naive-ui";
 
-const themeOverride = ref<GlobalThemeOverrides | null>(null);
+const loadingBar = useLoadingBar();
+const message = useMessage();
+const notifiication = useNotification();
+const dialog = useDialog();
+
+window.$message = message;
+window.$notification = notifiication;
+window.$loadingBar = loadingBar;
+window.$dialog = dialog;
 </script>
 
 <template>
-  <n-config-provider
-    :locale="zhCN"
-    :date-locale="dateZhCN"
-    :theme="theme"
-    :theme-overrides="themeOverride"
-  >
-    <RouterView></RouterView>
-  </n-config-provider>
+  <RouterView></RouterView>
 </template>
 
 <style scoped></style>
