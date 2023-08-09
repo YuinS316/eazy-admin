@@ -19,7 +19,7 @@
         class="component"
         :style="getComponentStyle(item.style)"
         :is="item.component"
-        :id="'component' + item.id"
+        :id="'component_' + item.id"
         :propValue="item.propValue"
       ></component>
     </Shape>
@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { useEditorStore } from "@/store";
+import { useEditorStore } from "@/store/editor";
 import { useComposeStore } from "@/store/compose";
 import { useContextMenuStore } from "@/store/contextMenu";
 import { storeToRefs } from "pinia";

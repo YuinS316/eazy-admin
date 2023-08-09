@@ -1,6 +1,6 @@
 import type { DropdownMixedOption } from "naive-ui/es/dropdown/src/interface";
 import { defineStore, storeToRefs } from "pinia";
-import { useEditorStore } from ".";
+import { useEditorStore } from "./editor";
 
 //  没有选中元素的情况下菜单
 const unSelectedOptions = [

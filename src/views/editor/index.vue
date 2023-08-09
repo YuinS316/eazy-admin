@@ -29,13 +29,19 @@
   </div>
 </template>
 
+<script lang="ts">
+export default {
+  name: "EditorPage"
+};
+</script>
+
 <script setup lang="ts">
 import ComponentList from "@/components/ComponentList.vue";
 import ToolBar from "@/components/ToolBar.vue";
 import Editor from "@/components/Editor/index.vue";
 import AttrForm from "@/components/AttrForm/index.vue";
 import componentList from "@/material-components/component-list";
-import { useEditorStore } from "@/store";
+import { useEditorStore } from "@/store/editor";
 import { storeToRefs } from "pinia";
 import { cloneDeep } from "lodash-es";
 import { useComposeStore } from "@/store/compose";

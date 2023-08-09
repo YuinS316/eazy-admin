@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { useEditorStore } from "@/store";
+import { useEditorStore } from "@/store/editor";
 import { storeToRefs } from "pinia";
 
 const editorStore = useEditorStore();

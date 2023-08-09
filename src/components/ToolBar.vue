@@ -1,8 +1,8 @@
 <template>
   <div class="toolbar">
     <div>
-      <n-button> {{ "<" }} </n-button>
-      <n-button> {{ ">" }} </n-button>
+      <n-button @click="undo"> {{ "<" }} </n-button>
+      <n-button @click="redo"> {{ ">" }} </n-button>
       <n-button> 清空</n-button>
       <n-button> 预览 </n-button>
       <n-button> 保存 </n-button>
@@ -10,7 +10,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useSnapshotStore } from "@/store/snapshot";
+const snapshotStore = useSnapshotStore();
+const { undo, redo } = snapshotStore;
+</script>
 
 <style scoped lang="scss">
 $border-color: rgb(239, 239, 245);

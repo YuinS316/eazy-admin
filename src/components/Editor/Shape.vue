@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { useEditorStore } from "@/store";
+import { useEditorStore } from "@/store/editor";
 import { useComposeStore } from "@/store/compose";
 import { Recordable } from "@/types/typing";
 import { getStyle } from "@/utils/style";
