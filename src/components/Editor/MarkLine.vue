@@ -119,7 +119,7 @@ function showLine(isDownward: boolean, isRightward: boolean) {
 
         const conditions: { top: ConditionType[]; left: ConditionType[] } = {
           top: [
-            //  向上移，靠近其他组件的上边缘
+            //  上边线，靠近其他组件的上边缘
             {
               line: "xt",
               node: findRealNodeById(linesRefs.value, "xt")!,
@@ -127,7 +127,7 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: top,
               shift: top
             },
-            //  向上移，靠近其他组件的下边缘
+            //  上边线，靠近其他组件的下边缘
             {
               line: "xt",
               node: findRealNodeById(linesRefs.value, "xt")!,
@@ -135,7 +135,7 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: bottom,
               shift: bottom
             },
-            //  向上移，靠近其他组件中间的位置
+            //  上边线，靠近其他组件中间的位置
             {
               line: "xt",
               node: findRealNodeById(linesRefs.value, "xt")!,
@@ -143,7 +143,15 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: top + halfHeight,
               shift: top + halfHeight
             },
-            //  向中间靠
+            //  中间线，靠近上边线
+            {
+              line: "xc",
+              node: findRealNodeById(linesRefs.value, "xc")!,
+              isClosed: isClosed(currTop + currHalfHeight, top),
+              lineShift: top,
+              shift: top - currHalfHeight
+            },
+            //  中间线，向中间靠
             {
               line: "xc",
               node: findRealNodeById(linesRefs.value, "xc")!,
@@ -151,7 +159,15 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: top + halfHeight,
               shift: top + halfHeight - currHalfHeight
             },
-            //  向下移，靠近其他组件的下边缘
+            //  中间线，靠近下边缘
+            {
+              line: "xc",
+              node: findRealNodeById(linesRefs.value, "xc")!,
+              isClosed: isClosed(currTop + currHalfHeight, bottom),
+              lineShift: bottom,
+              shift: bottom - currHalfHeight
+            },
+            //  下边线，靠近其他组件的下边缘
             {
               line: "xb",
               node: findRealNodeById(linesRefs.value, "xb")!,
@@ -159,7 +175,7 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: bottom,
               shift: bottom - currHeight
             },
-            //  向下移，靠近其他组件的中间位子
+            //  下边线，靠近其他组件的中间位子
             {
               line: "xb",
               node: findRealNodeById(linesRefs.value, "xb")!,
@@ -167,7 +183,7 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: top + halfHeight,
               shift: top + halfHeight - currHeight
             },
-            //  向下移，靠近其他组件的上边缘
+            //  下边线，靠近其他组件的上边缘
             {
               line: "xb",
               node: findRealNodeById(linesRefs.value, "xb")!,
@@ -177,7 +193,7 @@ function showLine(isDownward: boolean, isRightward: boolean) {
             }
           ],
           left: [
-            //  向左移，靠近其他组件的左边缘
+            //  左边线，靠近其他组件的左边缘
             {
               line: "yl",
               node: findRealNodeById(linesRefs.value, "yl")!,
@@ -185,7 +201,7 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: left,
               shift: left
             },
-            //  向左移，靠近其他组件的右边缘
+            //  左边线，靠近其他组件的右边缘
             {
               line: "yl",
               node: findRealNodeById(linesRefs.value, "yl")!,
@@ -193,7 +209,7 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: right,
               shift: right
             },
-            //  向左移，靠近其他组件中间的位置
+            //  左边线，靠近其他组件中间的位置
             {
               line: "yl",
               node: findRealNodeById(linesRefs.value, "yl")!,
@@ -201,7 +217,15 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: left + halfWidth,
               shift: left + halfWidth
             },
-            //  向中间靠
+            //  中间线，向左边缘靠
+            {
+              line: "yc",
+              node: findRealNodeById(linesRefs.value, "yc")!,
+              isClosed: isClosed(currLeft + currHalfWidth, left),
+              lineShift: left,
+              shift: left - currHalfWidth
+            },
+            //  中间线，向中间靠
             {
               line: "yc",
               node: findRealNodeById(linesRefs.value, "yc")!,
@@ -209,7 +233,15 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: left + halfWidth,
               shift: left + halfWidth - currHalfWidth
             },
-            //  向右移，靠近其他组件的右边缘
+            //  中间线，向右边缘靠
+            {
+              line: "yc",
+              node: findRealNodeById(linesRefs.value, "yc")!,
+              isClosed: isClosed(currLeft + currHalfWidth, right),
+              lineShift: right,
+              shift: right - currHalfWidth
+            },
+            //  右边线，靠近其他组件的右边缘
             {
               line: "yr",
               node: findRealNodeById(linesRefs.value, "yr")!,
@@ -217,7 +249,7 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: right,
               shift: right - currWidth
             },
-            //  向右移，靠近其他组件的中间位子
+            //  右边线，靠近其他组件的中间位子
             {
               line: "yr",
               node: findRealNodeById(linesRefs.value, "yr")!,
@@ -225,7 +257,7 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               lineShift: left + halfWidth,
               shift: left + halfWidth - currWidth
             },
-            //  向右移，靠近其他组件的左边缘
+            //  右边线，靠近其他组件的左边缘
             {
               line: "yr",
               node: findRealNodeById(linesRefs.value, "yr")!,
