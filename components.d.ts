@@ -11,6 +11,8 @@ declare module '@vue/runtime-core' {
     ComponentList: typeof import('./src/components/ComponentList.vue')['default']
     ContxtMenu: typeof import('./src/components/Editor/ContxtMenu.vue')['default']
     Editor: typeof import('./src/components/Editor/index.vue')['default']
+    MaekLine: typeof import('./src/components/Editor/MaekLine.vue')['default']
+    MarkLine: typeof import('./src/components/Editor/MarkLine.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NCollapse: typeof import('naive-ui')['NCollapse']
     NCollapseItem: typeof import('naive-ui')['NCollapseItem']

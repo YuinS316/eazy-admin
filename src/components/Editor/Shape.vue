@@ -65,11 +65,13 @@ const handleMouseDownOnShape = (e: MouseEvent) => {
     pos.top = currentY - startY + startTop;
 
     setShapeStyle(pos);
+    window.$eventBus.emit("move", currentY - startY > 0, currentX - startX > 0);
   };
 
   const up = () => {
     document.removeEventListener("mousemove", move);
     document.removeEventListener("mouseup", up);
+    window.$eventBus.emit("stopMove");
   };
 
   document.addEventListener("mousemove", move);

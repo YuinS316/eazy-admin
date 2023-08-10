@@ -14,6 +14,15 @@ export function getShapeStyle(style: Recordable) {
   return result;
 }
 
+export function getComponentRotateStyle(style: Recordable) {
+  const result: Recordable = { ...style };
+
+  result.right = style.left + style.width;
+  result.bottom = style.top + style.height;
+
+  return result;
+}
+
 const keyWithPx = [
   "fontSize",
   "width",

@@ -23,7 +23,12 @@
         :propValue="item.propValue"
       ></component>
     </Shape>
+
+    <!-- 右键菜单 -->
     <ContextMenu></ContextMenu>
+
+    <!-- 辅助线 -->
+    <MarkLine></MarkLine>
   </div>
 </template>
 
@@ -36,6 +41,7 @@ import { getStyle, getShapeStyle } from "@/utils/style";
 import { Recordable } from "@/types/typing";
 import Shape from "./Shape.vue";
 import ContextMenu from "./ContxtMenu.vue";
+import MarkLine from "./MarkLine.vue";
 
 const editorStore = useEditorStore();
 const { componentData, currentComponent } = storeToRefs(editorStore);
