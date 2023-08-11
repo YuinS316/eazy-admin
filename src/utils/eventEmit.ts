@@ -16,8 +16,8 @@ export class EventEmitter {
   }
 
   once(evName: string, fn: Function) {
-    const wrapper = (cb: Function) => {
-      cb();
+    const wrapper = (...args: any[]) => {
+      fn(...args);
       this.off(evName, wrapper);
     };
     this.on(evName, wrapper);

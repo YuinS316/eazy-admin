@@ -4,16 +4,61 @@
       <n-button @click="undo"> {{ "<" }} </n-button>
       <n-button @click="redo"> {{ ">" }} </n-button>
       <n-button> 清空</n-button>
-      <n-button> 预览 </n-button>
-      <n-button> 保存 </n-button>
+      <n-button @click="handleOpenPreview"> 预览 </n-button>
+      <n-button @click="saveData"> 保存 </n-button>
+      <n-button @click="loadData"> 加载 </n-button>
     </div>
   </div>
+  <!-- 预览 -->
+  <Preview v-model="previewVisible"></Preview>
 </template>
 
 <script setup lang="ts">
 import { useSnapshotStore } from "@/store/snapshot";
+import Preview from "./Preview/index.vue";
+import { useEditorStore } from "@/store/editor";
+import { storeToRefs } from "pinia";
+import { LocalStore } from "@/utils/store";
+import { cloneDeep } from "@/utils/index";
+import { Recordable } from "@/types/typing";
+
 const snapshotStore = useSnapshotStore();
 const { undo, redo } = snapshotStore;
+
+const editorStore = useEditorStore();
+const { setComponentData, setCanvasStyleData } = editorStore;
+const { componentData, canvasStyleData } = storeToRefs(editorStore);
+
+//  ==========  预览 ==========
+const previewVisible = ref(false);
+function handleOpenPreview() {
+  previewVisible.value = true;
+}
+//  ==========  预览 ==========
+
+//  ==========  保存 & 加载 ==========
+const componentDataKey = "componentData";
+const canvasStyleDataKey = "canvasStyleData";
+
+const localStore = new LocalStore("editor");
+function saveData() {
+  const copyComponentData = cloneDeep(componentData.value);
+  const copyCanvasStyleData = cloneDeep(canvasStyleData.value);
+
+  localStore.setItem(componentDataKey, copyComponentData);
+  localStore.setItem(canvasStyleDataKey, copyCanvasStyleData);
+}
+
+function loadData() {
+  const componentCacheData = localStore.getItem(
+    componentDataKey
+  ) as Recordable[];
+  const canvasCacheData = localStore.getItem(canvasStyleDataKey) as Recordable;
+
+  setComponentData(componentCacheData);
+  setCanvasStyleData(canvasCacheData);
+}
+//  ==========  保存 & 加载 ==========
 </script>
 
 <style scoped lang="scss">

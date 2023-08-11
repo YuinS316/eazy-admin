@@ -167,7 +167,7 @@ export const useEditorStore = defineStore("editor", () => {
   });
 
   function setCanvasStyleData(key: string, val: unknown): void;
-  function setCanvasStyleData(value: Recordable, _: undefined): void;
+  function setCanvasStyleData(value: Recordable, _?: undefined): void;
   function setCanvasStyleData(key: unknown, val: unknown): void {
     if (isObject<ICanvasStyleData>(key)) {
       canvasStyleData.value = key;

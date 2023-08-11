@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AttrForm: typeof import('./src/components/AttrForm/index.vue')['default']
     ComponentList: typeof import('./src/components/ComponentList.vue')['default']
+    ComponentWrapper: typeof import('./src/components/Preview/ComponentWrapper.vue')['default']
     ContxtMenu: typeof import('./src/components/Editor/ContxtMenu.vue')['default']
     Editor: typeof import('./src/components/Editor/index.vue')['default']
     MaekLine: typeof import('./src/components/Editor/MaekLine.vue')['default']
@@ -22,6 +23,7 @@ declare module '@vue/runtime-core' {
     NDropdown: typeof import('naive-ui')['NDropdown']
     NForm: typeof import('naive-ui')['NForm']
     NFormItem: typeof import('naive-ui')['NFormItem']
+    NIcon: typeof import('naive-ui')['NIcon']
     NInput: typeof import('naive-ui')['NInput']
     NInputNumber: typeof import('naive-ui')['NInputNumber']
     NLayout: typeof import("naive-ui")["NLayout"]
@@ -35,6 +37,7 @@ declare module '@vue/runtime-core' {
     NSpace: typeof import("naive-ui")["NSpace"]
     NTabPane: typeof import('naive-ui')['NTabPane']
     NTabs: typeof import('naive-ui')['NTabs']
+    Preview: typeof import('./src/components/Preview/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Shape: typeof import('./src/components/Editor/Shape.vue')['default']

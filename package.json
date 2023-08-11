@@ -10,6 +10,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@vicons/ionicons5": "^0.12.0",
     "lodash-es": "^4.17.21",
     "nanoid": "^4.0.2",
     "pinia": "^2.0.33",
@@ -30,7 +31,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.4.0",
     "happy-dom": "^10.9.0",
-    "naive-ui": "^2.33.1",
+    "naive-ui": "^2.34.3",
     "prettier": "^2.7.1",
     "rollup-plugin-visualizer": "^5.9.0",
     "typescript": "^4.6.4",

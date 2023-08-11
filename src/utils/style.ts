@@ -40,6 +40,8 @@ export function getStyle(style: Recordable, filters: string[] = []) {
   Object.keys(style).forEach(key => {
     if (!filters.includes(key)) {
       if (key === "deg") {
+      } else if (key === "scale") {
+        result[key] = style[key] + "%";
       } else {
         let value = style[key];
 
