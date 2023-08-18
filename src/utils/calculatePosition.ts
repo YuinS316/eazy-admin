@@ -29,7 +29,7 @@ const calcFunMap = {
   r: calculateRightPoint
 };
 
-type CalcFunName = keyof typeof calcFunMap;
+type PointName = keyof typeof calcFunMap;
 
 /**
  * 计算拖拽点和拖拽点对角线的相关信息
@@ -40,7 +40,8 @@ type CalcFunName = keyof typeof calcFunMap;
 function calcDiagonalPosition(
   point: Point,
   symmetricPoint: Point,
-  degree: number
+  degree: number,
+  pointName: PointName
 ) {
   const newCenterPoint = getCenterPoint(point, symmetricPoint);
 
@@ -52,8 +53,20 @@ function calcDiagonalPosition(
     degree
   );
 
-  const newWidth = Math.abs(newPoint.x - newSymmetricPoint.x);
-  const newHeight = Math.abs(newPoint.y - newSymmetricPoint.y);
+  const r = /r/.test(pointName);
+  const b = /b/.test(pointName);
+
+  const xDiff =
+    r === true
+      ? newPoint.x - newSymmetricPoint.x
+      : newSymmetricPoint.x - newPoint.x;
+  const yDiff =
+    b === true
+      ? newPoint.y - newSymmetricPoint.y
+      : newSymmetricPoint.y - newPoint.y;
+
+  const newWidth = Math.floor(xDiff);
+  const newHeight = Math.floor(yDiff);
 
   return {
     newCenterPoint,
@@ -107,7 +120,12 @@ function calculateLeftTopPoint(
     newPoint: newLeftTopPoint,
     newWidth,
     newHeight
-  } = calcDiagonalPosition(currentPosition, symmetricPoint, -style.rotate);
+  } = calcDiagonalPosition(
+    currentPosition,
+    symmetricPoint,
+    -style.rotate,
+    "lt"
+  );
 
   //  如果锁定宽高比
   if (isLockProportion) {
@@ -136,7 +154,8 @@ function calculateLeftTopPoint(
     } = calcDiagonalPosition(
       rotatedLeftTopPoint,
       symmetricPoint,
-      -style.rotate
+      -style.rotate,
+      "lt"
     );
 
     newLeftTopPoint = leftTopPoint;
@@ -166,7 +185,12 @@ function calculateRightTopPoint(
     newPoint: newRightTopPoint,
     newWidth,
     newHeight
-  } = calcDiagonalPosition(currentPosition, symmetricPoint, -style.rotate);
+  } = calcDiagonalPosition(
+    currentPosition,
+    symmetricPoint,
+    -style.rotate,
+    "rt"
+  );
 
   let diagonalPoint = newLeftBottomPoint;
 
@@ -194,7 +218,8 @@ function calculateRightTopPoint(
     } = calcDiagonalPosition(
       rotatedRightTopPoint,
       symmetricPoint,
-      -style.rotate
+      -style.rotate,
+      "rt"
     );
 
     newRightTopPoint = rightTopPoint;
@@ -226,7 +251,12 @@ function calculateLeftBottomPoint(
     newPoint: newLeftBottomPoint,
     newWidth,
     newHeight
-  } = calcDiagonalPosition(currentPosition, symmetricPoint, -style.rotate);
+  } = calcDiagonalPosition(
+    currentPosition,
+    symmetricPoint,
+    -style.rotate,
+    "lb"
+  );
 
   let diagonalPoint = newRightTopPoint;
 
@@ -254,7 +284,8 @@ function calculateLeftBottomPoint(
     } = calcDiagonalPosition(
       rotatedLeftBottomPoint,
       symmetricPoint,
-      -style.rotate
+      -style.rotate,
+      "lb"
     );
 
     newLeftBottomPoint = leftBottomPoint;
@@ -286,7 +317,12 @@ function calculateRightBottomPoint(
     newPoint: newRightBottomPoint,
     newWidth,
     newHeight
-  } = calcDiagonalPosition(currentPosition, symmetricPoint, -style.rotate);
+  } = calcDiagonalPosition(
+    currentPosition,
+    symmetricPoint,
+    -style.rotate,
+    "rb"
+  );
 
   let diagonalPoint = newLeftTopPoint;
 
@@ -314,7 +350,8 @@ function calculateRightBottomPoint(
     } = calcDiagonalPosition(
       rotatedRightBottomPoint,
       symmetricPoint,
-      -style.rotate
+      -style.rotate,
+      "rb"
     );
 
     newRightBottomPoint = rightBottomPointPoint;
@@ -451,10 +488,12 @@ export function calculatePositionAndSize(
   isLockProportion: boolean,
   pointInfos: PointInfos
 ) {
-  calcFunMap[pointName as CalcFunName](
-    style,
-    pointInfos,
-    proportion,
-    isLockProportion
-  );
+  if (calcFunMap[pointName as PointName]) {
+    calcFunMap[pointName as PointName](
+      style,
+      pointInfos,
+      proportion,
+      isLockProportion
+    );
+  }
 }
