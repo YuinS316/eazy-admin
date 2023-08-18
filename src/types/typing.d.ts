@@ -9,6 +9,11 @@ import type { EventEmitter } from "@/utils/eventEmit";
 
 export type Recordable = Record<string, any>;
 
+export type Point = {
+  x: number;
+  y: number;
+};
+
 declare global {
   interface Window {
     $eventBus: EventEmitter;

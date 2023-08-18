@@ -19,6 +19,20 @@ export const styleData = [
   { type: "input-number", key: "opacity", label: "不透明度" }
 ];
 
+//  对应的key在表单中操作所独有的额外属性
+export const formExtraProps = {
+  fontSize: {
+    step: 1,
+    min: 12,
+    max: 100
+  },
+  fontWeight: {
+    step: 100,
+    min: 100,
+    max: 900
+  }
+};
+
 export const textAlignOptions = [
   {
     label: "左对齐",

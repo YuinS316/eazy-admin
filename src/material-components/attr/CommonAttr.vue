@@ -21,6 +21,7 @@
               <n-input-number
                 v-if="type === 'input-number'"
                 v-model:value="currentComponent.style[key]"
+                v-bind="otherProps(key)"
               ></n-input-number>
               <n-input
                 v-if="type === 'input'"
@@ -45,7 +46,7 @@
 <script setup lang="ts">
 import { useEditorStore } from "@/store/editor";
 import { storeToRefs } from "pinia";
-import { styleData, optionMap } from "@/utils/attr";
+import { styleData, optionMap, formExtraProps } from "@/utils/attr";
 
 const editorStore = useEditorStore();
 const { componentData, currentComponent } = storeToRefs(editorStore);
@@ -70,6 +71,12 @@ const formRenderList = computed(() => {
 
   return [];
 });
+
+//  一些其他的限制属性
+const otherProps = (key: string) => {
+  //  @ts-ignore
+  return formExtraProps[key] || {};
+};
 </script>
 
 <style scoped lang="scss">
