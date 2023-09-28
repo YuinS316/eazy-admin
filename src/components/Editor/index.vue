@@ -42,6 +42,7 @@ import { Recordable } from "@/types/typing";
 import Shape from "./Shape.vue";
 import ContextMenu from "./ContxtMenu.vue";
 import MarkLine from "./MarkLine.vue";
+import { useCopyStore } from "@/store/copy";
 
 const editorStore = useEditorStore();
 const { componentData, currentComponent } = storeToRefs(editorStore);
@@ -56,8 +57,18 @@ const getComponentStyle = (style: Recordable) => {
   return getStyle({ ...style }, filterArrs);
 };
 
+const copyStore = useCopyStore();
+const { initKeyboardKeyListener } = copyStore;
+
+let removeKeyboardKeyListener: () => void;
+
 onMounted(() => {
   setEditorRef(editorRef.value!);
+  removeKeyboardKeyListener = initKeyboardKeyListener();
+});
+
+onUnmounted(() => {
+  removeKeyboardKeyListener();
 });
 
 const contextMenuStore = useContextMenuStore();

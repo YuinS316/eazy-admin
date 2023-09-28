@@ -275,6 +275,8 @@ function showLine(isDownward: boolean, isRightward: boolean) {
               condition.node.style[key as any] = `${condition.lineShift}px`;
               lineStatus.value[condition.line] = true;
               // debugger;
+
+              //  吸附
               setShapeStyle({
                 [key]: condition.shift
               });

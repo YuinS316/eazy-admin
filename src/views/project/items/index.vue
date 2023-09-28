@@ -1,6 +1,6 @@
 <template>
   <div>
-    <n-layout has-sider position="absolute">
+    <!-- <n-layout has-sider position="absolute">
       <n-space vertical>侧边栏</n-space>
 
       <n-layout>
@@ -17,11 +17,13 @@
           </n-layout-content>
         </n-layout>
       </n-layout>
-    </n-layout>
+    </n-layout> -->
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import axios from "axios";
+</script>
 
 <style lang="scss" scoped>
 .content-top {

@@ -1,8 +1,8 @@
 <template>
-  <div class="toolbar">
+  <div class="toolbar" id="layout-header">
     <div>
-      <n-button @click="undo"> {{ "<" }} </n-button>
-      <n-button @click="redo"> {{ ">" }} </n-button>
+      <n-button :disabled="!isUndoEnable" @click="undo"> {{ "<" }} </n-button>
+      <n-button :disabled="!isRedoEnable" @click="redo"> {{ ">" }} </n-button>
       <n-button> 清空</n-button>
       <n-button @click="handleOpenPreview"> 预览 </n-button>
       <n-button @click="saveData"> 保存 </n-button>
@@ -23,6 +23,7 @@ import { cloneDeep } from "@/utils/index";
 import { Recordable } from "@/types/typing";
 
 const snapshotStore = useSnapshotStore();
+const { isUndoEnable, isRedoEnable } = storeToRefs(snapshotStore);
 const { undo, redo } = snapshotStore;
 
 const editorStore = useEditorStore();

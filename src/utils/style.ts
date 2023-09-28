@@ -1,4 +1,5 @@
 import { Recordable } from "@/types/typing";
+import { cos, sin } from "./transition";
 
 export function getShapeStyle(style: Recordable) {
   const result: Recordable = {};
@@ -15,12 +16,28 @@ export function getShapeStyle(style: Recordable) {
 }
 
 export function getComponentRotateStyle(style: Recordable) {
-  const result: Recordable = { ...style };
+  style = { ...style };
+  if (style.rotate != 0) {
+    const newWidth =
+      style.width * cos(style.rotate) + style.height * sin(style.rotate);
+    const diffX = (style.width - newWidth) / 2;
+    style.left += diffX;
+    style.right = style.left + newWidth;
 
-  result.right = style.left + style.width;
-  result.bottom = style.top + style.height;
+    const newHeight =
+      style.height * cos(style.rotate) + style.width * sin(style.rotate);
+    const diffY = (newHeight - style.height) / 2;
+    style.top -= diffY;
+    style.bottom = style.top + newHeight;
 
-  return result;
+    style.width = newWidth;
+    style.height = newHeight;
+  } else {
+    style.bottom = style.top + style.height;
+    style.right = style.left + style.width;
+  }
+
+  return style;
 }
 
 const keyWithPx = [

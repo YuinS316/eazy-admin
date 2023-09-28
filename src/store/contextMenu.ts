@@ -1,6 +1,11 @@
+import { Recordable } from "@/types/typing";
+import { cloneDeep } from "@/utils";
+import { generateId } from "@/utils/id";
 import type { DropdownMixedOption } from "naive-ui/es/dropdown/src/interface";
 import { defineStore, storeToRefs } from "pinia";
+import { useCopyStore } from "./copy";
 import { useEditorStore } from "./editor";
+import { useSnapshotStore } from "./snapshot";
 
 //  没有选中元素的情况下菜单
 const unSelectedOptions = [
@@ -87,10 +92,17 @@ export const useContextMenuStore = defineStore("contextMenu", () => {
     moveDownComponent,
     moveTopComponent,
     moveBottomComponent,
-    deleteComponent
+    deleteComponent,
+    addComponentData
   } = editorStore;
 
   const { currentComponent } = storeToRefs(editorStore);
+
+  const snapShotStore = useSnapshotStore();
+  const { record } = snapShotStore;
+
+  const copyStore = useCopyStore();
+  const { copyComponent, cutComponent, pasteComponent } = copyStore;
 
   const x = ref(0);
   const y = ref(0);
@@ -125,6 +137,20 @@ export const useContextMenuStore = defineStore("contextMenu", () => {
       case "delete": {
         deleteComponent();
         break;
+      }
+
+      case "copy": {
+        copyComponent();
+        break;
+      }
+
+      case "paste": {
+        pasteComponent();
+        break;
+      }
+
+      case "cut": {
+        cutComponent();
       }
 
       default: {

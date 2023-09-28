@@ -130,7 +130,7 @@ const handleRotate = (e: MouseEvent) => {
     const currentY = ev.clientY;
 
     const endDegree = getDegreeByPoint(currentY - centerY, currentX - centerX);
-    pos.rotate = originDegree + endDegree - startDegree;
+    pos.rotate = Math.floor(originDegree + endDegree - startDegree);
     setShapeStyle(pos);
   };
 
@@ -253,64 +253,6 @@ const handleMouseDownOnShapePointV2 = (point: string, e: MouseEvent) => {
     });
 
     setShapeStyle(style);
-  };
-
-  const up = () => {
-    document.removeEventListener("mousemove", move);
-    document.removeEventListener("mouseup", up);
-  };
-
-  document.addEventListener("mousemove", move);
-  document.addEventListener("mouseup", up);
-};
-
-//  点击那些圆点，表示要拉伸或缩放，需要计算
-const handleMouseDownOnShapePoint = (point: string, e: MouseEvent) => {
-  e.stopPropagation();
-  e.preventDefault();
-
-  const position = { ...defaultStyle.value };
-
-  const { height, width, top, left } = position;
-
-  //  记录鼠标的位置
-  const startX = e.clientX;
-  const startY = e.clientY;
-
-  const move = (moveEvent: MouseEvent) => {
-    let currentX = moveEvent.clientX;
-    let currentY = moveEvent.clientY;
-
-    let diffX = currentX - startX;
-    let diffY = currentY - startY;
-
-    const hasT = /t/.test(point);
-    const hasB = /b/.test(point);
-    const hasL = /l/.test(point);
-    const hasR = /r/.test(point);
-
-    //  判断一下是操作的哪个点
-    //  举个例子，操作的下面的点，然后是向下拉的，diffY为+，h增加。
-    //  如果是上面的点往下拉，diff为+,h减少；但是如果它越过了下面的点，h设为0
-
-    const newHeight = height + (hasT ? -diffY : hasB ? diffY : 0);
-    const newWidth = width + (hasL ? -diffX : hasR ? diffX : 0);
-
-    position.height = newHeight > 0 ? newHeight : 0;
-    position.width = newWidth > 0 ? newWidth : 0;
-
-    if (hasT && Math.abs(diffY) > height) {
-      //  如果不加这个判断，会导致从上面的三个圆点往下拉，超过高度之后会推着组件走
-    } else {
-      position.top = top + (hasT ? diffY : 0);
-    }
-
-    if (hasL && Math.abs(diffX) > width) {
-    } else {
-      position.left = left + (hasL ? diffX : 0);
-    }
-
-    setShapeStyle(position);
   };
 
   const up = () => {

@@ -4,7 +4,7 @@
 
     <main>
       <!-- 物料库 -->
-      <section class="left">
+      <section class="left" id="layout-aside">
         <ComponentList></ComponentList>
       </section>
 

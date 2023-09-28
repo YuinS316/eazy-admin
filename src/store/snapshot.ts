@@ -5,26 +5,39 @@ import { useEditorStore } from "./editor";
 
 export const useSnapshotStore = defineStore("snapshot", () => {
   let snapshotData: Array<Recordable[]> = [];
-  let snapshotIndex: number = -1;
+  let snapshotIndex = ref(-1);
+
+  let hasUndo = false;
 
   const editorStore = useEditorStore();
 
+  const isUndoEnable = computed(() => snapshotIndex.value >= 0);
+  const isRedoEnable = computed(
+    () => snapshotIndex.value < snapshotData.length && hasUndo
+  );
+
   //  回退到上一步
   function undo() {
+    hasUndo = true;
+
     const { setComponentData } = editorStore;
-    if (snapshotIndex >= 0) {
-      snapshotIndex--;
-      setComponentData(cloneDeep(snapshotData[snapshotIndex]));
+    if (snapshotIndex.value >= 0) {
+      snapshotIndex.value--;
+      setComponentData(cloneDeep(snapshotData[snapshotIndex.value]));
     }
   }
 
   //  前进到下一步
   function redo() {
     const { setComponentData } = editorStore;
-    if (snapshotIndex <= snapshotData.length - 1) {
-      snapshotIndex++;
+    if (snapshotIndex.value <= snapshotData.length - 1) {
+      snapshotIndex.value++;
 
-      setComponentData(cloneDeep(snapshotData[snapshotIndex]));
+      if (snapshotIndex.value === snapshotData.length - 1) {
+        hasUndo = false;
+      }
+
+      setComponentData(cloneDeep(snapshotData[snapshotIndex.value]));
     }
   }
 
@@ -32,19 +45,21 @@ export const useSnapshotStore = defineStore("snapshot", () => {
   function record() {
     const { componentData } = storeToRefs(editorStore);
 
-    snapshotData[++snapshotIndex] = cloneDeep<Recordable[]>(
+    snapshotData[++snapshotIndex.value] = cloneDeep<Recordable[]>(
       toRaw(componentData.value)
     );
 
     //  可能会回退再进行新的操作，这时候要把后面的快照清掉
-    if (snapshotIndex !== snapshotData.length - 1) {
-      snapshotData = snapshotData.slice(0, snapshotIndex + 1);
+    if (snapshotIndex.value !== snapshotData.length - 1) {
+      snapshotData = snapshotData.slice(0, snapshotIndex.value + 1);
     }
   }
 
   return {
     undo,
     redo,
-    record
+    record,
+    isUndoEnable,
+    isRedoEnable
   };
 });
