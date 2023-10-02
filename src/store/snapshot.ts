@@ -3,6 +3,9 @@ import { cloneDeep } from "@/utils";
 import { defineStore, storeToRefs } from "pinia";
 import { useEditorStore } from "./editor";
 
+/**
+ * 负责记录每次操作留下的快照
+ */
 export const useSnapshotStore = defineStore("snapshot", () => {
   let snapshotData: Array<Recordable[]> = [];
   let snapshotIndex = ref(-1);

@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Area: typeof import('./src/components/Editor/Area.vue')['default']
     AttrForm: typeof import('./src/components/AttrForm/index.vue')['default']
     ComponentList: typeof import('./src/components/ComponentList.vue')['default']
     ComponentWrapper: typeof import('./src/components/Preview/ComponentWrapper.vue')['default']

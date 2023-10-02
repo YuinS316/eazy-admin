@@ -5,6 +5,9 @@ import { defineStore, storeToRefs } from "pinia";
 import { useEditorStore } from "./editor";
 import { useSnapshotStore } from "./snapshot";
 
+/**
+ * 负责管理组件的复制，粘贴
+ */
 export const useCopyStore = defineStore("copy", () => {
   const editorStore = useEditorStore();
 
@@ -91,18 +94,13 @@ export const useCopyStore = defineStore("copy", () => {
             left: left + 10
           };
         } else {
-          const headerEl = document.querySelector("#layout-header")!;
-          const asideEl = document.querySelector("#layout-aside")!;
-
-          const padding = 16;
-
-          const yOffset = headerEl.getBoundingClientRect().height + padding;
-          const xOffset = asideEl.getBoundingClientRect().width + padding;
+          const editorEl = document.querySelector("#editor")!;
+          const editorRect = editorEl.getBoundingClientRect();
 
           component.data.style = {
             ...component.data.style,
-            top: (y.value || 0) - yOffset,
-            left: (x.value || 0) - xOffset
+            top: (y.value || 0) - editorRect.y,
+            left: (x.value || 0) - editorRect.x
           };
         }
 

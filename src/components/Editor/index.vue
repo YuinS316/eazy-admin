@@ -4,6 +4,7 @@
     class="editor"
     ref="editorRef"
     @contextmenu="handleOpenContextMenu"
+    @mousedown="handleMouseDown"
   >
     <Shape
       v-for="(item, index) in componentData"
@@ -29,6 +30,14 @@
 
     <!-- 辅助线 -->
     <MarkLine></MarkLine>
+
+    <!-- 选中区域 -->
+    <Area
+      :is-show="isShow"
+      :start-pos="startPos"
+      :width="width"
+      :height="height"
+    ></Area>
   </div>
 </template>
 
@@ -42,7 +51,9 @@ import { Recordable } from "@/types/typing";
 import Shape from "./Shape.vue";
 import ContextMenu from "./ContxtMenu.vue";
 import MarkLine from "./MarkLine.vue";
+import Area from "./Area.vue";
 import { useCopyStore } from "@/store/copy";
+import { useArea } from "@/hooks/useArea";
 
 const editorStore = useEditorStore();
 const { componentData, currentComponent } = storeToRefs(editorStore);
@@ -73,6 +84,8 @@ onUnmounted(() => {
 
 const contextMenuStore = useContextMenuStore();
 const { handleOpenContextMenu } = contextMenuStore;
+
+const { isShow, startPos, width, height, handleMouseDown } = useArea();
 </script>
 
 <style scoped lang="scss">

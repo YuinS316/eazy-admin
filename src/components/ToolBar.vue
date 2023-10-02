@@ -1,9 +1,9 @@
 <template>
-  <div class="toolbar" id="layout-header">
+  <div class="toolbar">
     <div>
       <n-button :disabled="!isUndoEnable" @click="undo"> {{ "<" }} </n-button>
       <n-button :disabled="!isRedoEnable" @click="redo"> {{ ">" }} </n-button>
-      <n-button> 清空</n-button>
+      <n-button @click="resetData"> 清空</n-button>
       <n-button @click="handleOpenPreview"> 预览 </n-button>
       <n-button @click="saveData"> 保存 </n-button>
       <n-button @click="loadData"> 加载 </n-button>
@@ -37,17 +37,31 @@ function handleOpenPreview() {
 }
 //  ==========  预览 ==========
 
+//  ==========  清空 ==========
+function resetData() {
+  setComponentData([]);
+  setCanvasStyleData({});
+}
+//  ==========  清空 ==========
+
 //  ==========  保存 & 加载 ==========
 const componentDataKey = "componentData";
 const canvasStyleDataKey = "canvasStyleData";
 
 const localStore = new LocalStore("editor");
 function saveData() {
-  const copyComponentData = cloneDeep(componentData.value);
-  const copyCanvasStyleData = cloneDeep(canvasStyleData.value);
+  try {
+    const copyComponentData = cloneDeep(componentData.value);
+    const copyCanvasStyleData = cloneDeep(canvasStyleData.value);
 
-  localStore.setItem(componentDataKey, copyComponentData);
-  localStore.setItem(canvasStyleDataKey, copyCanvasStyleData);
+    localStore.setItem(componentDataKey, copyComponentData);
+    localStore.setItem(canvasStyleDataKey, copyCanvasStyleData);
+
+    window.$message.success("保存成功");
+  } catch (error) {
+    window.$message.error("保存失败");
+    console.error("[save data error]: ", error);
+  }
 }
 
 function loadData() {
@@ -56,8 +70,18 @@ function loadData() {
   ) as Recordable[];
   const canvasCacheData = localStore.getItem(canvasStyleDataKey) as Recordable;
 
-  setComponentData(componentCacheData);
-  setCanvasStyleData(canvasCacheData);
+  if (componentCacheData) {
+    setComponentData(componentCacheData);
+  }
+  if (canvasCacheData) {
+    setCanvasStyleData(canvasCacheData);
+  }
+
+  if (!componentCacheData && !canvasCacheData) {
+    window.$message.warning("暂无保存的数据，无法加载");
+  } else {
+    window.$message.success("加载成功");
+  }
 }
 //  ==========  保存 & 加载 ==========
 </script>

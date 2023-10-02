@@ -9,6 +9,13 @@ import type { EventEmitter } from "@/utils/eventEmit";
 
 export type Recordable = Record<string, any>;
 
+export type ComponentData<T = any> = Recordable & {
+  id?: string;
+  component: string;
+  style: Recordable;
+  propValue: T;
+};
+
 export type Point = {
   x: number;
   y: number;

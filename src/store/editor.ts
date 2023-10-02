@@ -23,6 +23,9 @@ interface ICanvasStyleData {
   [k: string]: any;
 }
 
+/**
+ * 负责管理在编辑器中的组件
+ */
 export const useEditorStore = defineStore("editor", () => {
   //  画布中的组件列表
   const componentData = ref<Recordable[]>([]);
