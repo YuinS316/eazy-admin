@@ -8,6 +8,7 @@ import { getComponentRotateStyle } from "@/utils/style";
 
 const props = defineProps<{
   isShow: boolean;
+  //  左上角的坐标
   startPos: Point;
   width: number;
   height: number;

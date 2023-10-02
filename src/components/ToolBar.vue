@@ -7,6 +7,7 @@
       <n-button @click="handleOpenPreview"> 预览 </n-button>
       <n-button @click="saveData"> 保存 </n-button>
       <n-button @click="loadData"> 加载 </n-button>
+      <n-button @click="compose"> 组合 </n-button>
     </div>
   </div>
   <!-- 预览 -->
@@ -21,6 +22,7 @@ import { storeToRefs } from "pinia";
 import { LocalStore } from "@/utils/store";
 import { cloneDeep } from "@/utils/index";
 import { Recordable } from "@/types/typing";
+import { useComposeStore } from "@/store/compose";
 
 const snapshotStore = useSnapshotStore();
 const { isUndoEnable, isRedoEnable } = storeToRefs(snapshotStore);
@@ -29,6 +31,9 @@ const { undo, redo } = snapshotStore;
 const editorStore = useEditorStore();
 const { setComponentData, setCanvasStyleData } = editorStore;
 const { componentData, canvasStyleData } = storeToRefs(editorStore);
+
+const composeStore = useComposeStore();
+const { compose } = composeStore;
 
 //  ==========  预览 ==========
 const previewVisible = ref(false);

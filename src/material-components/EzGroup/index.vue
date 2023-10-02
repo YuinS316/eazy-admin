@@ -8,6 +8,7 @@
       class="ez-component"
       :prop-value="item.propValue"
       :style="item.groupStyle"
+      :element="item"
     ></component>
   </div>
 </template>
@@ -23,6 +24,10 @@ export default defineComponent({
     propValue: {
       type: Array as PropType<ComponentData[]>,
       value: []
+    },
+    element: {
+      type: Object,
+      value: {}
     }
   },
   setup() {

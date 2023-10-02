@@ -76,16 +76,19 @@ let removeKeyboardKeyListener: () => void;
 onMounted(() => {
   setEditorRef(editorRef.value!);
   removeKeyboardKeyListener = initKeyboardKeyListener();
+  window.$eventBus.on("hideArea", hideArea);
 });
 
 onUnmounted(() => {
   removeKeyboardKeyListener();
+  window.$eventBus.off("hideArea", hideArea);
 });
 
 const contextMenuStore = useContextMenuStore();
 const { handleOpenContextMenu } = contextMenuStore;
 
-const { isShow, startPos, width, height, handleMouseDown } = useArea();
+const { isShow, startPos, width, height, handleMouseDown, hideArea } =
+  useArea();
 </script>
 
 <style scoped lang="scss">

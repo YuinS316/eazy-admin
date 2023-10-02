@@ -32,9 +32,13 @@ import { storeToRefs } from "pinia";
 import { calculatePositionAndSize } from "@/utils/calculatePosition";
 
 const props = defineProps<{
+  //  数据结构
   element: Recordable;
+  //  初始样式
   defaultStyle: Recordable;
+  //  在componentData中的序号
   index: number;
+  //  是否是在编辑状态
   active: boolean;
 }>();
 

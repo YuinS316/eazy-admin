@@ -1,13 +1,14 @@
 import { ComponentData, Recordable } from "@/types/typing";
+import { generateId } from "@/utils/id";
 
 //  公共样式
-const commonStyle = {
+export const commonStyle = {
   opacity: 1,
   rotate: 0
 };
 
 //  公共属性
-const commonAttr = {
+export const commonAttr = {
   //  是否锁定
   isLock: false
 };
@@ -39,6 +40,7 @@ const list: Array<ComponentData> = [
   {
     component: "EzGroup",
     propValue: [],
+    isHidden: true,
     style: {
       left: 0,
       top: 0,

@@ -120,6 +120,10 @@ export const useCopyStore = defineStore("copy", () => {
     copyComponent,
     cutComponent,
     pasteComponent,
-    initKeyboardKeyListener
+    initKeyboardKeyListener,
+    //  提供给vitest做测试
+    get _copiedComponent() {
+      return copiedComponent;
+    }
   };
 });

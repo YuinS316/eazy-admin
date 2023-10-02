@@ -1,6 +1,6 @@
 import { useComposeStore } from "@/store/compose";
 import { useEditorStore } from "@/store/editor";
-import { Point, Recordable } from "@/types/typing";
+import { ComponentData, Point, Recordable } from "@/types/typing";
 import { getComponentRotateStyle } from "@/utils/style";
 import { storeToRefs } from "pinia";
 
@@ -20,6 +20,7 @@ export function useArea() {
   const { currentComponent, componentData } = storeToRefs(editorStore);
 
   const composeStore = useComposeStore();
+  const { setAreaData } = composeStore;
   const { editorRef } = storeToRefs(composeStore);
 
   /**
@@ -62,11 +63,17 @@ export function useArea() {
         startPos.value = pos;
       };
 
-      const up = () => {
+      const up = (ev: MouseEvent) => {
         window.removeEventListener("mousemove", move);
         window.removeEventListener("mouseup", up);
 
-        hideArea();
+        //  相当于点击，直接取消选中即可
+        if (ev.clientX === startX && ev.clientY === startY) {
+          hideArea();
+          return;
+        }
+
+        createGroup();
       };
 
       window.addEventListener("mousemove", move);
@@ -92,7 +99,7 @@ export function useArea() {
    * @returns
    */
   function getSelectedAreaComponents() {
-    const result: Recordable[] = [];
+    const result: ComponentData[] = [];
     const { x, y } = startPos.value;
 
     componentData.value.forEach(component => {
@@ -109,7 +116,7 @@ export function useArea() {
         top >= y &&
         top + h <= y + height.value
       ) {
-        result.push(component);
+        result.push(component as ComponentData);
       }
     });
 
@@ -121,13 +128,13 @@ export function useArea() {
    */
   function createGroup() {
     const areaDataList = getSelectedAreaComponents();
-    if (!areaDataList.length) return;
+    if (areaDataList.length <= 1) return hideArea();
 
     //  组合后的坐标
     let left = Infinity,
       right = -Infinity,
       top = Infinity,
-      bottom = Infinity;
+      bottom = -Infinity;
 
     areaDataList.forEach(component => {
       const {
@@ -143,12 +150,23 @@ export function useArea() {
       bottom = Math.max(bottom, b);
     });
 
-    const style = {
-      left,
-      top,
-      width: right - left,
-      height: bottom - top
+    startPos.value = {
+      x: left,
+      y: top
     };
+
+    width.value = right - left;
+    height.value = bottom - top;
+
+    setAreaData({
+      style: {
+        left,
+        top,
+        width: width.value,
+        height: height.value
+      },
+      components: areaDataList
+    });
   }
 
   return {
@@ -156,6 +174,7 @@ export function useArea() {
     startPos,
     width,
     height,
-    handleMouseDown
+    handleMouseDown,
+    hideArea
   };
 }

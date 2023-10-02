@@ -64,7 +64,7 @@ export function calculateRotatedPoint(
  * @param angel 角度
  */
 export function cos(angel: number) {
-  return Math.cos(angelToRadian(angel));
+  return Math.abs(Math.cos(angelToRadian(angel)));
 }
 
 /**
@@ -72,5 +72,5 @@ export function cos(angel: number) {
  * @param angel 角度
  */
 export function sin(angel: number) {
-  return Math.sin(angelToRadian(angel));
+  return Math.abs(Math.sin(angelToRadian(angel)));
 }

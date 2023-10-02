@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import ComponentList from "@/material-components/component-list";
-const componentList = ref([...ComponentList]);
+const componentList = ref([...ComponentList.filter(item => !item.isHidden)]);
 
 const handleDragStart = (e: DragEvent) => {
   //  配置表中的组件所属序号
