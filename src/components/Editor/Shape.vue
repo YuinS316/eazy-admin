@@ -207,7 +207,11 @@ const handleMouseDownOnShapePointV2 = (point: string, e: MouseEvent) => {
   //  宽高比
   const proportion = width / height;
 
-  const isLockProportion = false;
+  let isLockProportion = false;
+
+  if (props.element.component === "EzGroup") {
+    isLockProportion = true;
+  }
 
   //  中心点
   const centerPoint = {

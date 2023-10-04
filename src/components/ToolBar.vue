@@ -8,6 +8,7 @@
       <n-button @click="saveData"> 保存 </n-button>
       <n-button @click="loadData"> 加载 </n-button>
       <n-button @click="compose"> 组合 </n-button>
+      <n-button @click="decompose"> 拆分 </n-button>
     </div>
   </div>
   <!-- 预览 -->
@@ -33,7 +34,7 @@ const { setComponentData, setCanvasStyleData } = editorStore;
 const { componentData, canvasStyleData } = storeToRefs(editorStore);
 
 const composeStore = useComposeStore();
-const { compose } = composeStore;
+const { compose, decompose } = composeStore;
 
 //  ==========  预览 ==========
 const previewVisible = ref(false);

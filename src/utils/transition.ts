@@ -64,7 +64,7 @@ export function calculateRotatedPoint(
  * @param angel 角度
  */
 export function cos(angel: number) {
-  return Math.abs(Math.cos(angelToRadian(angel)));
+  return Math.cos(angelToRadian(angel));
 }
 
 /**
@@ -72,5 +72,21 @@ export function cos(angel: number) {
  * @param angel 角度
  */
 export function sin(angel: number) {
+  return Math.sin(angelToRadian(angel));
+}
+
+/**
+ * 返回正的余弦值
+ * @param angel
+ */
+export function postiveCos(angel: number) {
+  return Math.abs(Math.cos(angelToRadian(angel)));
+}
+
+export function positiveSin(angel: number) {
   return Math.abs(Math.sin(angelToRadian(angel)));
+}
+
+export function mod360(deg: number) {
+  return (deg + 360) % 360;
 }

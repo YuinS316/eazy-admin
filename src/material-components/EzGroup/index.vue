@@ -16,7 +16,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import type { PropType } from "vue";
-import { ComponentData } from "@/types/typing";
+import { ComponentData, Recordable } from "@/types/typing";
+import { getStyle, getShapeStyle } from "@/utils/style";
 
 export default defineComponent({
   // name: "EzGroup",
