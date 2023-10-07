@@ -12,7 +12,7 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
-    "types": ["naive-ui/volar"],
+    "types": ["naive-ui/volar", "unplugin-vue-define-options/macros-global"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]

@@ -1,13 +1,12 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
-import Unocss from "unocss/vite";
-import { presetAttributify, presetUno } from "unocss";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
 import { visualizer } from "rollup-plugin-visualizer";
 import compress from "vite-plugin-compress";
+import DefineOptions from "unplugin-vue-define-options/vite";
 
 const pathResolve = (dir: string): string => {
   return resolve(__dirname, ".", dir);
@@ -17,20 +16,9 @@ const pathResolve = (dir: string): string => {
 export default defineConfig({
   plugins: [
     vue(),
+    DefineOptions(),
     // compress(),
     visualizer(),
-    // Unocss({
-    //   presets: [
-    //     presetAttributify({
-    //       /* preset options */
-    //     }),
-    //     presetUno()
-    //     // ...custom presets
-    //   ],
-    //   rules: [
-    //     // your custom rules
-    //   ]
-    // }),
     Components({
       dts: true,
       resolvers: [NaiveUiResolver()]
