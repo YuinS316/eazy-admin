@@ -23,7 +23,9 @@
 
       <!-- 属性设置库 -->
       <section class="right">
-        <AttrForm></AttrForm>
+        <AttrForm v-show="currentComponent"></AttrForm>
+
+        <EditorAttrForm v-show="!currentComponent"></EditorAttrForm>
       </section>
     </main>
   </div>
@@ -47,9 +49,10 @@ import { storeToRefs } from "pinia";
 import { cloneDeep } from "lodash-es";
 import { useComposeStore } from "@/store/compose";
 import { generateId } from "@/utils/id";
+import EditorAttrForm from "@/components/AttrForm/EditorAttrForm.vue";
 
 const editorStore = useEditorStore();
-const { isClickComponent } = storeToRefs(editorStore);
+const { isClickComponent, currentComponent } = storeToRefs(editorStore);
 const { addComponentData, setIsClickComponent, setCurrentComponent } =
   editorStore;
 

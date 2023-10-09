@@ -27,7 +27,7 @@ import { useComposeStore } from "@/store/compose";
 
 const snapshotStore = useSnapshotStore();
 const { isUndoEnable, isRedoEnable } = storeToRefs(snapshotStore);
-const { undo, redo } = snapshotStore;
+const { undo, redo, record } = snapshotStore;
 
 const editorStore = useEditorStore();
 const { setComponentData, setCanvasStyleData } = editorStore;
@@ -47,6 +47,7 @@ function handleOpenPreview() {
 function resetData() {
   setComponentData([]);
   setCanvasStyleData({});
+  record("clear");
 }
 //  ==========  清空 ==========
 

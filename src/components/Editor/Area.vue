@@ -4,7 +4,6 @@
 
 <script setup lang="ts">
 import { Point } from "@/types/typing";
-import { getComponentRotateStyle } from "@/utils/style";
 
 const props = defineProps<{
   isShow: boolean;
@@ -28,5 +27,6 @@ const style = computed(() => ({
   border: 1px dashed var(--primary-color);
   background: transparent;
   position: absolute;
+  cursor: move;
 }
 </style>

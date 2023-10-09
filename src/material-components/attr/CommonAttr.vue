@@ -16,7 +16,7 @@
               <n-color-picker
                 v-if="type === 'color-picker'"
                 v-model:value="currentComponent.style[key]"
-                :actions="['confirm', 'clear']"
+                :actions="['clear']"
               ></n-color-picker>
               <n-input-number
                 v-if="type === 'input-number'"

@@ -16,10 +16,8 @@ interface ICanvasStyleData {
   width: number;
   height: number;
   scale: number;
-  color: string;
   opacity: number;
   background: string;
-  fontSize: number;
   [k: string]: any;
 }
 
@@ -163,10 +161,8 @@ export const useEditorStore = defineStore("editor", () => {
     width: 1280,
     height: 900,
     scale: 100,
-    color: "#000",
     opacity: 1,
-    background: "#fff",
-    fontSize: 14
+    background: "#fff"
   });
 
   function setCanvasStyleData(key: string, val: unknown): void;

@@ -43,6 +43,10 @@ const emit = defineEmits<{
   (event: "update:modelValue", value: boolean): void;
 }>();
 
+defineOptions({
+  name: "Preview"
+});
+
 //  ======== 遮罩关闭 ===========
 const visible = computed({
   get() {

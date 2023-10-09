@@ -6,38 +6,42 @@
     @contextmenu="handleOpenContextMenu"
     @mousedown="handleMouseDown"
   >
-    <Shape
-      v-for="(item, index) in componentData"
-      :class="{ shape__active: currentComponent === item }"
-      :active="currentComponent === item"
-      :index="index"
-      :element="item"
-      :defaultStyle="item.style"
-      :style="getShapeStyle(item.style)"
-      :key="item.id"
-    >
-      <component
-        class="component"
-        :style="getComponentStyle(item.style)"
-        :is="item.component"
-        :id="'component_' + item.id"
-        :propValue="item.propValue"
-      ></component>
-    </Shape>
+    <n-scrollbar x-scrollable :style="canvasStyle">
+      <!-- 网格线 -->
+      <Grid></Grid>
+      <Shape
+        v-for="(item, index) in componentData"
+        :class="{ shape__active: currentComponent === item }"
+        :active="currentComponent === item"
+        :index="index"
+        :element="item"
+        :defaultStyle="item.style"
+        :style="getShapeStyle(item.style)"
+        :key="item.id"
+      >
+        <component
+          class="component"
+          :style="getComponentStyle(item.style)"
+          :is="item.component"
+          :id="'component_' + item.id"
+          :propValue="item.propValue"
+        ></component>
+      </Shape>
 
-    <!-- 右键菜单 -->
-    <ContextMenu></ContextMenu>
+      <!-- 右键菜单 -->
+      <ContextMenu></ContextMenu>
 
-    <!-- 辅助线 -->
-    <MarkLine></MarkLine>
+      <!-- 辅助线 -->
+      <MarkLine></MarkLine>
 
-    <!-- 选中区域 -->
-    <Area
-      :is-show="isShow"
-      :start-pos="startPos"
-      :width="width"
-      :height="height"
-    ></Area>
+      <!-- 选中区域 -->
+      <Area
+        :is-show="isShow"
+        :start-pos="startPos"
+        :width="width"
+        :height="height"
+      ></Area>
+    </n-scrollbar>
   </div>
 </template>
 
@@ -52,11 +56,13 @@ import Shape from "./Shape.vue";
 import ContextMenu from "./ContxtMenu.vue";
 import MarkLine from "./MarkLine.vue";
 import Area from "./Area.vue";
+import Grid from "./Grid.vue";
 import { useCopyStore } from "@/store/copy";
 import { useArea } from "@/hooks/useArea";
 
 const editorStore = useEditorStore();
-const { componentData, currentComponent } = storeToRefs(editorStore);
+const { componentData, currentComponent, canvasStyleData } =
+  storeToRefs(editorStore);
 
 const composeStore = useComposeStore();
 const editorRef = ref<HTMLDivElement>();
@@ -67,6 +73,20 @@ const getComponentStyle = (style: Recordable) => {
   const filterArrs = ["width", "height", "top", "left", "rotate"];
   return getStyle({ ...style }, filterArrs);
 };
+
+const canvasStyle = computed(() => {
+  const result: Recordable = {};
+  Object.keys(canvasStyleData.value).forEach(key => {
+    result[key] = canvasStyleData.value[key];
+    if (["width", "height"].includes(key)) {
+      result[key] = canvasStyleData.value[key] + "px";
+    }
+    if (key === "scale") {
+      result[key] = canvasStyleData.value[key] / 100;
+    }
+  });
+  return result;
+});
 
 const copyStore = useCopyStore();
 const { initKeyboardKeyListener } = copyStore;
