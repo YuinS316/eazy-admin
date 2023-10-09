@@ -43,7 +43,7 @@ export const useEditorStore = defineStore("editor", () => {
     }
 
     //  记录操作
-    record();
+    record("add");
   }
 
   //  设置画布中的组件
@@ -86,7 +86,7 @@ export const useEditorStore = defineStore("editor", () => {
       componentData.value.splice(index, 1);
       currentComponent.value = null;
       //  记录操作
-      record();
+      record("delete");
     }
   }
 
@@ -99,7 +99,7 @@ export const useEditorStore = defineStore("editor", () => {
       if (index < componentData.value.length - 1) {
         swap(componentData.value, index, index + 1);
         currentComponentIndex.value = index + 1; //  记录操作
-        record();
+        record("moveup");
       } else {
         window.$message.warning("已经到顶了");
       }
@@ -114,7 +114,7 @@ export const useEditorStore = defineStore("editor", () => {
         swap(componentData.value, index, index - 1);
         currentComponentIndex.value = index - 1;
         //  记录操作
-        record();
+        record("movedown");
       } else {
         window.$message.warning("已经到底了");
       }
@@ -132,7 +132,7 @@ export const useEditorStore = defineStore("editor", () => {
           componentData.value.push(currentComponent.value);
         }
         currentComponentIndex.value = finalIndex; //  记录操作
-        record();
+        record("movetop");
       } else {
         window.$message.warning("已经到顶了");
       }
@@ -151,7 +151,7 @@ export const useEditorStore = defineStore("editor", () => {
         }
         currentComponentIndex.value = firstIndex;
         //  记录操作
-        record();
+        record("movebottom");
       } else {
         window.$message.warning("已经到底了");
       }

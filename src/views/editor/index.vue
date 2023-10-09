@@ -5,7 +5,7 @@
     <main>
       <!-- 物料库 -->
       <section class="left">
-        <ComponentList></ComponentList>
+        <SideBar></SideBar>
       </section>
 
       <!-- 画布部分 -->
@@ -40,6 +40,7 @@ import ComponentList from "@/components/ComponentList.vue";
 import ToolBar from "@/components/ToolBar.vue";
 import Editor from "@/components/Editor/index.vue";
 import AttrForm from "@/components/AttrForm/index.vue";
+import SideBar from "@/components/SideBar.vue";
 import componentList from "@/material-components/component-list";
 import { useEditorStore } from "@/store/editor";
 import { storeToRefs } from "pinia";

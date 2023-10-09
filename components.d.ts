@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     ComponentWrapper: typeof import('./src/components/Preview/ComponentWrapper.vue')['default']
     ContxtMenu: typeof import('./src/components/Editor/ContxtMenu.vue')['default']
     Editor: typeof import('./src/components/Editor/index.vue')['default']
+    HistoryList: typeof import('./src/components/HistoryList.vue')['default']
     MarkLine: typeof import('./src/components/Editor/MarkLine.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NCollapse: typeof import('naive-ui')['NCollapse']
@@ -23,6 +24,7 @@ declare module '@vue/runtime-core' {
     NDropdown: typeof import('naive-ui')['NDropdown']
     NForm: typeof import('naive-ui')['NForm']
     NFormItem: typeof import('naive-ui')['NFormItem']
+    NGlobalStyle: typeof import('naive-ui')['NGlobalStyle']
     NIcon: typeof import('naive-ui')['NIcon']
     NInput: typeof import('naive-ui')['NInput']
     NInputNumber: typeof import('naive-ui')['NInputNumber']
@@ -37,6 +39,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Shape: typeof import('./src/components/Editor/Shape.vue')['default']
+    SideBar: typeof import('./src/components/SideBar.vue')['default']
     ToolBar: typeof import('./src/components/ToolBar.vue')['default']
   }
 }

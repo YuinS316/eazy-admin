@@ -26,14 +26,9 @@ const handleDragStart = (e: DragEvent) => {
 .component-list {
   padding: 8px;
 
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 80px);
-  grid-template-rows: repeat(auto-fill, 40px);
-  gap: 8px;
-
   .box {
     box-sizing: border-box;
-    width: 80px;
+    width: 100%;
     height: 40px;
     border: 1px solid #ddd;
     cursor: grab;

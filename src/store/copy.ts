@@ -105,7 +105,7 @@ export const useCopyStore = defineStore("copy", () => {
         }
 
         addComponentData(component.data);
-        record();
+        record("paste");
       }
     }
   }
