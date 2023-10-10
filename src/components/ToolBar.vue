@@ -46,7 +46,13 @@ function handleOpenPreview() {
 //  ==========  清空 ==========
 function resetData() {
   setComponentData([]);
-  setCanvasStyleData({});
+  setCanvasStyleData({
+    width: 1280,
+    height: 900,
+    scale: 100,
+    opacity: 1,
+    background: "#fff"
+  });
   record("clear");
 }
 //  ==========  清空 ==========

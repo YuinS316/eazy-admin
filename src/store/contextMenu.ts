@@ -1,6 +1,3 @@
-import { Recordable } from "@/types/typing";
-import { cloneDeep } from "@/utils";
-import { generateId } from "@/utils/id";
 import type { DropdownMixedOption } from "naive-ui/es/dropdown/src/interface";
 import { defineStore, storeToRefs } from "pinia";
 import { useCopyStore } from "./copy";

@@ -11,6 +11,7 @@
     >
       {{ item.label }}
     </div>
+    <div v-show="!componentData.length">暂无层级数据</div>
   </div>
 </template>
 

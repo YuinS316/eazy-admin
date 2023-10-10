@@ -43,7 +43,8 @@
       ></Area>
     </n-scrollbar>
 
-    <ScaleController></ScaleController>
+    <!-- 缩放控制 -->
+    <!-- <ScaleController></ScaleController> -->
   </div>
 </template>
 
