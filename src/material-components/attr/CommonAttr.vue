@@ -36,8 +36,8 @@
           </n-form-item>
         </n-form>
       </n-collapse-item>
-      <n-collapse-item title="静态类型" name="2">
-        <div>Java</div>
+      <n-collapse-item title="额外属性" name="extraAttr">
+        <div>none</div>
       </n-collapse-item>
     </n-collapse>
   </div>

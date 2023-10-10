@@ -11,7 +11,9 @@ type ActionType =
   | "movedown"
   | "movetop"
   | "movebottom"
-  | "clear";
+  | "clear"
+  | "compose"
+  | "decompose";
 
 type ActionRecord = {
   //  操作类型
@@ -45,7 +47,9 @@ export const useSnapshotStore = defineStore("snapshot", () => {
     movedown: "下移",
     movetop: "置顶",
     movebottom: "置底",
-    clear: "重置"
+    clear: "重置",
+    compose: "组合",
+    decompose: "拆分"
   };
 
   //  时间旅行，返回到之前的任意一个时刻

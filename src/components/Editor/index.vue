@@ -42,6 +42,8 @@
         :height="height"
       ></Area>
     </n-scrollbar>
+
+    <ScaleController></ScaleController>
   </div>
 </template>
 
@@ -59,6 +61,7 @@ import Area from "./Area.vue";
 import Grid from "./Grid.vue";
 import { useCopyStore } from "@/store/copy";
 import { useArea } from "@/hooks/useArea";
+import ScaleController from "./ScaleController.vue";
 
 const editorStore = useEditorStore();
 const { componentData, currentComponent, canvasStyleData } =
@@ -75,16 +78,13 @@ const getComponentStyle = (style: Recordable) => {
 };
 
 const canvasStyle = computed(() => {
-  const result: Recordable = {};
-  Object.keys(canvasStyleData.value).forEach(key => {
-    result[key] = canvasStyleData.value[key];
-    if (["width", "height"].includes(key)) {
-      result[key] = canvasStyleData.value[key] + "px";
-    }
-    if (key === "scale") {
-      result[key] = canvasStyleData.value[key] / 100;
-    }
-  });
+  const scale = canvasStyleData.value.scale / 100;
+  const result: Recordable = {
+    width: canvasStyleData.value.width * scale + "px",
+    height: canvasStyleData.value.height * scale + "px",
+    background: canvasStyleData.value.background
+  };
+
   return result;
 });
 

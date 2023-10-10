@@ -7,7 +7,7 @@
       v-for="(item, index) in renderSnapShotList"
       :key="item.timestamp"
       class="history-list-item"
-      :class="{ 'history-list-item__active': renderSnapshotIndex === index }"
+      :class="{ 'history-list-item__active': snapshotIndex === index }"
       @click="setRenderSnapShotIndex(index)"
     >
       {{ item.title }}
@@ -26,28 +26,22 @@ const { snapshotData, snapshotIndex } = storeToRefs(snapshotStore);
 const { actionToTitleMap, timeTravel } = snapshotStore;
 
 const renderSnapShotList = computed(() =>
-  snapshotData.value
-    .map(item => ({
-      title: actionToTitleMap[item.type],
-      timestamp: day(item.timestamp).format("YYYY-MM-DD HH:mm:ss")
-    }))
-    .toReversed()
-);
-
-const renderSnapshotIndex = computed(
-  () => snapshotData.value.length - 1 - snapshotIndex.value
+  snapshotData.value.map(item => ({
+    title: actionToTitleMap[item.type],
+    timestamp: day(item.timestamp).format("YYYY-MM-DD HH:mm:ss")
+  }))
 );
 
 function setRenderSnapShotIndex(value: number) {
-  const index = snapshotData.value.length - 1 - value;
-
-  timeTravel(index);
+  timeTravel(value);
 }
 </script>
 
 <style scoped lang="scss">
 .history-list {
   padding: 8px;
+  display: flex;
+  flex-direction: column-reverse;
   .history-list-item {
     display: flex;
     align-items: center;

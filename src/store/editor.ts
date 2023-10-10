@@ -33,7 +33,11 @@ export const useEditorStore = defineStore("editor", () => {
   const { record } = snapshotStore;
 
   //  画布中添加组件
-  function addComponentData(component: Recordable, index?: number) {
+  function addComponentData(
+    component: Recordable,
+    index?: number,
+    shouldRecord = true
+  ) {
     if (index !== undefined) {
       componentData.value.splice(index, 0, component);
     } else {
@@ -41,7 +45,7 @@ export const useEditorStore = defineStore("editor", () => {
     }
 
     //  记录操作
-    record("add");
+    shouldRecord && record("add");
   }
 
   //  设置画布中的组件
@@ -78,13 +82,13 @@ export const useEditorStore = defineStore("editor", () => {
   }
 
   // ======== 删除组件 ===============
-  function deleteComponent() {
+  function deleteComponent(shouldRecord = true) {
     if (isNumber(currentComponentIndex.value)) {
       let index = currentComponentIndex.value;
       componentData.value.splice(index, 1);
       currentComponent.value = null;
       //  记录操作
-      record("delete");
+      shouldRecord && record("delete");
     }
   }
 

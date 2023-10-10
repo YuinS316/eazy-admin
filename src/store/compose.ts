@@ -6,6 +6,7 @@ import { getStyle } from "@/utils/style";
 import { mod360 } from "@/utils/transition";
 import { defineStore, storeToRefs } from "pinia";
 import { useEditorStore } from "./editor";
+import { useSnapshotStore } from "./snapshot";
 
 export const useComposeStore = defineStore("compose", () => {
   const editorStore = useEditorStore();
@@ -31,9 +32,12 @@ export const useComposeStore = defineStore("compose", () => {
     if (areaData.value) {
       const components = cloneDeep(areaData.value.components);
 
+      const { record } = useSnapshotStore();
+
       const groupComponent: ComponentData = {
         id: generateId(),
         component: "EzGroup",
+        label: "组合",
         style: {
           ...commonStyle,
           ...areaData.value.style
@@ -67,7 +71,7 @@ export const useComposeStore = defineStore("compose", () => {
 
       window.$eventBus.emit("hideArea");
 
-      addComponentData(groupComponent);
+      addComponentData(groupComponent, undefined, false);
 
       //  将组合后的组件移除
       const batchRemoveInsideComponents = () => {
@@ -82,12 +86,16 @@ export const useComposeStore = defineStore("compose", () => {
       setCurrentComponent(groupComponent, componentData.value.length - 1);
 
       areaData.value = null;
+
+      record("compose");
     }
   }
 
   //  ========= 拆分 ===========
   function decompose() {
     if (currentComponent.value) {
+      const { record } = useSnapshotStore();
+
       const components: ComponentData[] = currentComponent.value.propValue;
       const parentStyle = { ...currentComponent.value.style };
       const editorRect = editorRef.value!.getBoundingClientRect();
@@ -120,14 +128,16 @@ export const useComposeStore = defineStore("compose", () => {
       };
 
       //  先删除目前组合的元素
-      deleteComponent();
+      deleteComponent(false);
 
       //  重新计算
       components.forEach(component => {
         calDecomposeInsideComponentStyle(component);
 
-        addComponentData(component);
+        addComponentData(component, undefined, false);
       });
+
+      record("decompose");
     }
   }
 

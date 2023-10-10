@@ -39,6 +39,7 @@ const list: Array<ComponentData> = [
   },
   {
     component: "EzGroup",
+    label: "组合",
     propValue: [],
     isHidden: true,
     style: {

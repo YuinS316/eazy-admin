@@ -21,12 +21,17 @@
 </template>
 
 <script setup lang="ts">
-import { ListCircleOutline, TimeOutline } from "@vicons/ionicons5";
+import {
+  ListCircleOutline,
+  TimeOutline,
+  LayersOutline
+} from "@vicons/ionicons5";
 import { Raw } from "vue";
 import ComponentList from "./ComponentList.vue";
 import HistoryList from "./HistoryList.vue";
+import LayerList from "./LayerList.vue";
 
-type IdType = "material" | "history";
+type IdType = "material" | "history" | "layer";
 
 type RenderItem = {
   icon: Raw<typeof ListCircleOutline>;
@@ -43,6 +48,12 @@ const renderList = ref<RenderItem[]>([
     isActive: true
   },
   {
+    icon: markRaw(LayersOutline),
+    title: "层级",
+    id: "layer",
+    isActive: false
+  },
+  {
     icon: markRaw(TimeOutline),
     title: "历史",
     id: "history",
@@ -52,7 +63,8 @@ const renderList = ref<RenderItem[]>([
 
 const renderComponentMap = {
   material: markRaw(ComponentList),
-  history: markRaw(HistoryList)
+  history: markRaw(HistoryList),
+  layer: markRaw(LayerList)
 };
 
 const activeId = computed(
